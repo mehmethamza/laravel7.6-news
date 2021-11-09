@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('/deneme', function () {
-   $categories =  Category::where("pid",0) ->get();
+   $categories =  Category::where("pid",0) ->with("child") ->get();
 
     return view("deneme",compact("categories"));
 });
