@@ -1,3 +1,3 @@
 <li>
-    <a href="category-1.html">Technology</a>
+    <a href="category-1.html">{{$category -> name}}</a>
 </li>

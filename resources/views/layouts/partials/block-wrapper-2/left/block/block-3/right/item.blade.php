@@ -1,11 +1,13 @@
 <div class="item">
     <div class="post-content">
         <h3 class="post-title">
-            <a href="#">plans to ride out Hurricane the Florence on a boat</a>
+            <a href="#">{{$content -> title}}</a>
         </h3>
         <span class="post-date-info">
             <i class="fa fa-clock-o"></i>
-            March 21, 2019
+            @php
+            echo  Carbon\Carbon::parse($content -> created_at) ->toDateString();
+            @endphp
         </span>
     </div>
 </div>

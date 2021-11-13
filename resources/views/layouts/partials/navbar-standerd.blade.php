@@ -40,11 +40,31 @@
 
                         <!-- nav menu start-->
                         <ul class="nav-menu align-to-right">
-                            @include('layouts.partials.navbar-standerd.megamenu-list')
-                            @include('layouts.partials.navbar-standerd.megamenu-tabs')
-                            @include('layouts.partials.navbar-standerd.megamenu-one')
-                            @include('layouts.partials.navbar-standerd.megamenu-panel')
-                            @include('layouts.partials.navbar-standerd.megamenu-navdown')
+
+                            <li class="active">
+                                <a href="/">Home</a>
+                            </li>
+                            @foreach ($categories as $category)
+
+                                @switch($category -> type)
+                                    @case("one")
+                                            @include('layouts.partials.navbar-standerd.megamenu-one')
+                                        @break
+                                    @case("tabs")
+                                            @include('layouts.partials.navbar-standerd.megamenu-tabs')
+                                        @break
+                                    @case("panel")
+                                            @include('layouts.partials.navbar-standerd.megamenu-panel')
+
+                                        @break
+                                    @case("navdown")
+                                            @include('layouts.partials.navbar-standerd.megamenu-navdown')
+
+                                        @break
+                                    @default
+
+                                @endswitch
+                            @endforeach
 
 
 

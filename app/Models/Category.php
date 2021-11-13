@@ -12,4 +12,8 @@ class Category extends Model
     public function child(){
         return $this-> hasMany("App\Models\Category","pid");
     }
+
+    public function contents(){
+        return $this -> belongsToMany("App\Models\Contents","caco") ;
+    }
 }

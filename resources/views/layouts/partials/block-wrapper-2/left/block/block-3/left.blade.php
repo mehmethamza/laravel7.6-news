@@ -1,12 +1,18 @@
 <div class="col-lg-8">
     <div class="ts-overlay-style featured-post">
-        <div class="item " style="background-image:url(images/news/health/health3.jpg)">
-            <a href="#" class="post-cat ts-purple-bg">Health</a>
+        <div class="item " style="background-image:url({{$block_wrapper_2_3[0] -> image}})">
+            <a href="#" class="post-cat ts-purple-bg">
+                @php
+                    foreach ($block_wrapper_2_3[0] -> category as  $category) {
+                    echo $category -> name ;
+                    }
+                @endphp
+            </a>
             <div class="overlay-post-content">
                 <div class="post-content">
 
                     <h3 class="post-title md">
-                        <a href="#">They’re back! Kennedy Darling, LeCras named to Kennedy Darling, LeCras named return</a>
+                        <a href="#">{{$block_wrapper_2_3[0] -> title}}</a>
                     </h3>
                     <ul class="post-meta-info">
                         <li class="author">
@@ -16,12 +22,11 @@
                         </li>
                         <li>
                             <i class="fa fa-clock-o"></i>
-                            March 21, 2019
+                            @php
+                                echo  Carbon\Carbon::parse($block_wrapper_2_3[0] -> created_at) ->toDateString();
+                            @endphp
                         </li>
-                        <li class="active">
-                            <i class="icon-fire"></i>
-                            3,005
-                        </li>
+
                     </ul>
                 </div>
             </div>

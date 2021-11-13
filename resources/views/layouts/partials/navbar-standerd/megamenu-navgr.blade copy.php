@@ -1,4 +1,4 @@
-<header class="navbar-standerd">
+{{-- <header class="navbar-standerd">
   <div class="container">
     <div class="row">
       <!-- logo end-->
@@ -50,4 +50,4 @@
       </div>
     </div>
   </div>
-</header>
+</header> --}}

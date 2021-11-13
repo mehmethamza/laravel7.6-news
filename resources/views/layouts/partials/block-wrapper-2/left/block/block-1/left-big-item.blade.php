@@ -1,14 +1,18 @@
 <div class="col-lg-7">
     <div class="tab-content featured-post" id="nav-tabContent">
         <div class="tab-pane ts-overlay-style fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-            <div class="item" style="background-image: url(images/news/travel/travel2.jpg)">
+            <div class="item" style="background-image: url({{$block_wrapper_2_1[0] -> image}})">
 
-                <a class="post-cat ts-orange-bg" href="#">TRAVEL</a>
+                <a class="post-cat ts-orange-bg" href="#">
+                    @foreach ($block_wrapper_2_1[0] -> category as $category)
+                    {{$category -> name}}
+                    @endforeach
+                </a>
 
                 <div class="overlay-post-content">
                     <div class="post-content">
                         <h3 class="post-title md">
-                            <a href="#">They’re back! Kennedy Darling, LeCras named to return</a>
+                            <a href="#">{{$block_wrapper_2_1[0] -> title}}</a>
                         </h3>
                         <ul class="post-meta-info">
                             <li class="author">
@@ -18,12 +22,11 @@
                             </li>
                             <li>
                                 <i class="fa fa-clock-o"></i>
-                                March 21, 2019
+                                @php
+                                echo Carbon\Carbon::parse($block_wrapper_2_1[0] -> created_at) ->toDateString();
+                            @endphp
                             </li>
-                            <li class="active">
-                                <i class="icon-fire"></i>
-                                3,005
-                            </li>
+
                         </ul>
                     </div>
                 </div>
@@ -32,7 +35,7 @@
             <!-- item end-->
         </div>
         <!--tab-pane ts-overlay-style end-->
-        <div class="tab-pane ts-overlay-style fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        {{-- <div class="tab-pane ts-overlay-style fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
             <div class="item" style="background-image: url(images/news/health/health2.jpg)">
 
                 <a class="post-cat ts-purple-bg" href="#">Health</a>
@@ -87,17 +90,14 @@
                                 <i class="fa fa-clock-o"></i>
                                 March 21, 2019
                             </li>
-                            <li class="active">
-                                <i class="icon-fire"></i>
-                                3,005
-                            </li>
+
                         </ul>
                     </div>
                 </div>
                 <!-- overlay post content-->
             </div>
             <!-- item end-->
-        </div>
+        </div> --}}
         <!--tab-pane ts-overlay-style end-->
     </div>
 
