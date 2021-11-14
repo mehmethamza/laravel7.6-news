@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnasayfaController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContentController;
 use App\Models\Category;
 use App\Models\Contents;
@@ -50,7 +51,6 @@ Route::get('/deneme2', function () {
 
 Route::get("/content/{slug}",[ContentController::class,"content"])->name("content");
 
-Route::get("/category",function(){
-    $categories = Category::where("pid",0)->get();
-    return view("category",compact("categories"));
-});
+
+
+Route::get("/category/{slug}",[CategoryController::class,"category"]) -> name("category");
