@@ -49,3 +49,8 @@ Route::get('/deneme2', function () {
 
 
 Route::get("/content/{slug}",[ContentController::class,"content"])->name("content");
+
+Route::get("/category",function(){
+    $categories = Category::where("pid",0)->get();
+    return view("category",compact("categories"));
+});
