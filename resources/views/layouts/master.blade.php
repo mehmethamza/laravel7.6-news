@@ -15,41 +15,41 @@
 	<!-- CSS
    ==================================================== -->
 	<!-- Bootstrap -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
 
 	<!-- Font Awesome -->
-	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
 
 	<!-- Font Awesome -->
-	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="/css/animate.css">
 
 	<!-- IcoFonts -->
-	<link rel="stylesheet" href="css/icofonts.css">
+	<link rel="stylesheet" href="/css/icofonts.css">
 
 	<!-- Owl Carousel -->
-	<link rel="stylesheet" href="css/owlcarousel.min.css">
+	<link rel="stylesheet" href="/css/owlcarousel.min.css">
 
 	<!-- slick -->
-	<link rel="stylesheet" href="css/slick.css">
+	<link rel="stylesheet" href="/css/slick.css">
 
 
 
 	<!-- navigation -->
-	<link rel="stylesheet" href="css/navigation.css">
+	<link rel="stylesheet" href="/css/navigation.css">
 
 	<!-- magnific popup -->
-	<link rel="stylesheet" href="css/magnific-popup.css">
+	<link rel="stylesheet" href="/css/magnific-popup.css">
 
 
 
 
 	<!-- Style -->
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="/css/style.css">
 
-	<link rel="stylesheet" href="css/colors/color-3.css">
+	<link rel="stylesheet" href="/css/colors/color-3.css">
 
 	<!-- Responsive -->
-	<link rel="stylesheet" href="css/responsive.css">
+	<link rel="stylesheet" href="/css/responsive.css">
 
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -69,28 +69,28 @@
 	=============================================================================-->
 
 	<!-- initialize jQuery Library -->
-	<script src="js/jquery.min.js"></script>
+	<script src="/js/jquery.min.js"></script>
 	<!-- navigation JS -->
-	<script src="js/navigation.js"></script>
+	<script src="/js/navigation.js"></script>
 	<!-- Popper JS -->
-	<script src="js/popper.min.js"></script>
+	<script src="/js/popper.min.js"></script>
 
 	<!-- magnific popup JS -->
-	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="/js/jquery.magnific-popup.min.js"></script>
 
 
 
 	<!-- Bootstrap jQuery -->
-	<script src="js/bootstrap.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
 	<!-- Owl Carousel -->
-	<script src="js/owl-carousel.2.3.0.min.js"></script>
+	<script src="/js/owl-carousel.2.3.0.min.js"></script>
 	<!-- slick -->
-	<script src="js/slick.min.js"></script>
+	<script src="/js/slick.min.js"></script>
 
 	<!-- smooth scroling -->
-	<script src="js/smoothscroll.js"></script>
+	<script src="/js/smoothscroll.js"></script>
 
-	<script src="js/main.js"></script>
+	<script src="/js/main.js"></script>
 </body>
 
 </html>

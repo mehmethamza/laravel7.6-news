@@ -13,7 +13,7 @@
                 <div class="item">
                     <div class="ts-post-thumb">
                         <a class="post-cat ts-blue-bg" href="#">{{$block_wrapper_2_2 -> name}}</a>
-                        <a href="#">
+                        <a href="{{ route("content",$content ->slug)}}">
                             <img class="img-fluid" src="{{$content -> image}}" alt="">
                         </a>
 
@@ -21,7 +21,7 @@
                     <div class="overlay-post-content">
                         <div class="post-content">
                             <h3 class="post-title md">
-                                <a href="#">{{$content -> title}}</a>
+                                <a href="{{ route("content",$content ->slug)}}">{{$content -> title}}</a>
                             </h3>
                             <span class="post-date-info">
                                 <i class="fa fa-clock-o"></i>

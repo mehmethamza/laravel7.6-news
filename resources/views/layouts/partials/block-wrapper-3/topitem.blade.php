@@ -1,18 +1,26 @@
 <div class="item">
 
     <div class="ts-post-thumb">
-        <a href="#">
-            <img class="img-fluid" src="images/news/business/business_2.jpg" alt="">
+        <a href="{{ route("content",$content ->slug)}}">
+            <img class="img-fluid" src="{{$content -> image}}" alt="">
         </a>
     </div>
     <div class="post-content">
-        <a class="post-cat ts-blue-dark-bg" href="#">Market</a>
+        <a class="post-cat ts-blue-dark-bg" href="#">
+            @php
+                foreach ($content -> category as $key => $category) {
+                    echo $category-> name;
+                }
+            @endphp
+        </a>
         <h3 class="post-title">
-            <a href="#">How to get the most when selling your old iPhone</a>
+            <a href="{{ route("content",$content ->slug)}}">{{$content -> title}}</a>
         </h3>
         <span class="post-date-info">
             <i class="fa fa-clock-o"></i>
-            March 21, 2019
+            @php
+                echo Carbon\Carbon::parse($content -> created_at) ->toDateString();
+            @endphp
         </span>
     </div>
 </div>

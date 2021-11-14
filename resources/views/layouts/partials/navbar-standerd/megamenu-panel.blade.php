@@ -10,14 +10,14 @@
             <div class="col-12 col-lg-3">
                 <div class="item">
                     <div class="ts-post-thumb">
-                        <a href="">
+                        <a href="{{ route("content",$content->slug)}}">
                             <img class="img-fluid" src="{{$content -> image}}" alt="">
                         </a>
                         {{-- <a href="https://www.youtube.com/watch?v=uZmz6fGRVW4" class="fa fa-play-circle-o ts-video-icon"></a> --}}
                     </div>
                     <div class="post-content">
                         <h3 class="post-title">
-                            <a href="#">{{$content -> title}}</a>
+                            <a href="{{ route("content",$content->slug)}}">{{$content -> title}}</a>
                         </h3>
                     </div>
                 </div>

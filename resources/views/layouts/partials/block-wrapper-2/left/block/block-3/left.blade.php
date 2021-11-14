@@ -12,7 +12,7 @@
                 <div class="post-content">
 
                     <h3 class="post-title md">
-                        <a href="#">{{$block_wrapper_2_3[0] -> title}}</a>
+                        <a href="{{ route("content",$block_wrapper_2_3[0] ->slug)}}">{{$block_wrapper_2_3[0] -> title}}</a>
                     </h3>
                     <ul class="post-meta-info">
                         <li class="author">

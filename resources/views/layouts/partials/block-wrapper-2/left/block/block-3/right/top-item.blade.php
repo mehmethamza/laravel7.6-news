@@ -1,12 +1,12 @@
 <div class="item">
     <div class="ts-post-thumb">
-        <a href="#">
+        <a href="{{ route("content",$content ->slug)}}">
             <img class="img-fluid" src="{{$content -> image}}" alt="">
         </a>
     </div>
     <div class="post-content">
         <h3 class="post-title">
-            <a href="#">{{$content -> title}}</a>
+            <a href="{{ route("content",$content ->slug)}}">{{$content -> title}}</a>
         </h3>
         <span class="post-date-info">
             <i class="fa fa-clock-o"></i>

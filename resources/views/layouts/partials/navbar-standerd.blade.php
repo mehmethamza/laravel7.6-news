@@ -8,7 +8,7 @@
                 <nav class="navigation ts-main-menu navigation-landscape">
                     <div class="nav-header">
                         <a class="nav-brand" href="index.html">
-                            <img src="images/logo/footer_logo.png" alt="">
+                            <img src="/images/logo/footer_logo.png" alt="">
                         </a>
                         <div class="nav-toggle"></div>
                     </div>

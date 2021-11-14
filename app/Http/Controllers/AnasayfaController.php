@@ -26,6 +26,8 @@ class AnasayfaController extends Controller
         $block_wrapper_2_2 = $this -> select(Category::inRandomOrder() ->get(),2) ;
         $block_wrapper_2_3 = Contents::all() -> random(4) ;
 
-        return view("welcome",compact("categories","block_wrapper_1","block_wrapper_2_1","block_wrapper_2_2","block_wrapper_2_3"));
+        $block_wrapper_3 = Contents::orderBy('created_at', 'ASC') -> take(4) -> get() ;
+
+        return view("welcome",compact("categories","block_wrapper_1","block_wrapper_2_1","block_wrapper_2_2","block_wrapper_2_3","block_wrapper_3"));
     }
 }

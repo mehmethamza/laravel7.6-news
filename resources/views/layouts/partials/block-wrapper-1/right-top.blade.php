@@ -8,7 +8,7 @@
         <div class="overlay-post-content">
             <div class="post-content">
                 <h2 class="post-title md">
-                    <a href="#">{{$block_wrapper_1[1] -> title}}</a>
+                    <a href="{{ route("content",$block_wrapper_1[1] ->slug)}}">{{$block_wrapper_1[1] -> title}}</a>
                 </h2>
                 <span class="post-date-info">
                     <i class="fa fa-clock-o"> </i>

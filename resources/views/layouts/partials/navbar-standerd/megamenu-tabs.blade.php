@@ -37,13 +37,13 @@
                                             {{$category -> name}}
                                         @endforeach
                                         </a>
-                                        <a href="#">
-                                            <img class="img-fluid" src="images/news/health/health1.jpg" alt="">
+                                        <a href="{{ route("content",$content->slug)}}">
+                                            <img class="img-fluid" src="{{ $content -> image}}" alt="">
                                         </a>
                                     </div>
                                     <div class="post-content">
                                         <h3 class="post-title">
-                                            <a href="#">{{ $content -> title}}</a>
+                                            <a href="{{ route("content",$content->slug)}}">{{ $content -> title}}</a>
                                         </h3>
                                     </div>
                                 </div>
@@ -73,8 +73,8 @@
                                                 {{$category -> name}}
                                             @endforeach
                                             </a>
-                                            <a href="#">
-                                                <img class="img-fluid" src="images/news/health/health1.jpg" alt="">
+                                            <a href="{{ route("content",$content->slug)}}">
+                                                <img class="img-fluid" src="{{$content -> image}}" alt="">
                                             </a>
                                         </div>
                                         <div class="post-content">

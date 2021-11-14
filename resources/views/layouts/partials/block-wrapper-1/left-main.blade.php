@@ -9,7 +9,7 @@
             <div class="overlay-post-content">
                 <div class="post-content">
                     <h2 class="post-title large">
-                        <a href="#">{{$block_wrapper_1[0] -> title}}</a>
+                        <a href="{{ route("content",$block_wrapper_1[0] ->slug)}}">{{$block_wrapper_1[0] -> title}}</a>
                     </h2>
                     <ul class="post-meta-info">
                         <li class="author">

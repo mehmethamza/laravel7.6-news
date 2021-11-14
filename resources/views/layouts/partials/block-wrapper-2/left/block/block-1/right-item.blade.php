@@ -1,5 +1,5 @@
-<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home"
-    aria-selected="true">
+<a  class="nav-item nav-link active" id="nav-home-tab" href="{{ route("content",$content ->slug)}}" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home"
+    aria-selected="true" >
     <div class="post-content media">
         <img class="d-flex" src="{{$content -> image}}" alt="">
         <div class="media-body align-self-center">

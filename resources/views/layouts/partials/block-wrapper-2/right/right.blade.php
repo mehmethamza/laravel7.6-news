@@ -58,7 +58,7 @@
         <!-- end-->
         <div class="widgets widgets-item widget-banner">
             <a href="#">
-                <img class="img-fluid" src="images/banner/sidebar-banner1.jpg" alt="">
+                <img class="img-fluid" src="/images/banner/sidebar-banner1.jpg" alt="">
             </a>
         </div>
         <!-- widgets end-->
@@ -70,7 +70,7 @@
                 <div class="item">
                     <div class="ts-post-thumb">
                         <a href="#">
-                            <img class="img-fluid" src="images/news/travel/travel8.jpg" alt="">
+                            <img class="img-fluid" src="/images/news/travel/travel8.jpg" alt="">
                         </a>
                     </div>
                     <div class="overlay-post-content">
@@ -91,7 +91,7 @@
             <!-- ts-overlay-style  end-->
 
             <div class="post-content media">
-                <img class="d-flex sidebar-img" src="images/news/health/health8.jpg" alt="">
+                <img class="d-flex sidebar-img" src="/images/news/health/health8.jpg" alt="">
                 <div class="media-body align-self-center">
                     <h4 class="post-title">
                         <a href="">18 month shoots himself by gun </a>
@@ -100,7 +100,7 @@
             </div>
             <!-- post content end-->
             <div class="post-content media">
-                <img class="d-flex sidebar-img" src="images/news/health/health3.jpg" alt="">
+                <img class="d-flex sidebar-img" src="/images/news/health/health3.jpg" alt="">
                 <div class="media-body align-self-center">
                     <h4 class="post-title">
                         <a href="">18 month shoots himself by gun </a>
@@ -112,39 +112,22 @@
         <!-- widgets end-->
         <div class="widgets widgets-item">
             <h3 class="widget-title">
-                <span>Category</span>
+                <span>Kategoriler</span>
             </h3>
             <ul class="category-list">
+
+                @foreach ($categories as $category)
+
+
                 <li>
-                    <a href="#">Travel
-                        <span class="ts-orange-bg">10</span>
+                    <a href="#">{{$category -> name}}
+                        <span class="ts-green-bg">@php
+                            echo count($category -> contents) + count($category -> child);
+                        @endphp</span>
                     </a>
                 </li>
-                <li>
-                    <a href="#">Sports
-                        <span class="ts-green-bg">25</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">Travel
-                        <span class="ts-orange-bg">10</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">Fashion
-                        <span class="ts-pink-bg">10</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">Technology
-                        <span class="ts-blue-bg">10</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">Food
-                        <span class="ts-yellow-bg">10</span>
-                    </a>
-                </li>
+                @endforeach
+
 
             </ul>
         </div>
