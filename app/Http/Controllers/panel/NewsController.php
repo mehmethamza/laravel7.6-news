@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\panel;
 
+use App\Models\Caco;
 use Illuminate\Http\Request;
-use App\Models\News;
+
 use App\Models\Category;
+use App\Models\Contents;
+use App\Models\panel\News;
 use Illuminate\Support\Str;
 
 
@@ -16,7 +19,7 @@ class NewsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $items = News::all();
+        $items = Contents::all();
         return view('panel.news.list', compact('items'));
     }
 
@@ -26,7 +29,7 @@ class NewsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(){
-        $categories = Category::where('status', '1')->get();
+        $categories = Category::get();
         return view('panel.news.create', compact('categories'));
     }
 
@@ -37,16 +40,27 @@ class NewsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-        $item = new News;
-        $item->category_id = $request->category_id;
+        $item = new Contents;
+        $caco = new Caco;
+        $caco ->category_id = $request->category_id;
         $item->title = $request->title;
         $item->slug =  Str::slug($request->title);
-        $item->post_summery = $request->post_summery;
-        $item->desc = $request->desc;
-        $item->video = $request->video;
-        $item->rank = $request->rank;
-        $item->status = $request->status ? 1 : 0;
+
+        $image = request()-> file("image");
+        $image_name = $image-> hashName();
+        if ($image -> isValid() ) {
+            $move_name = "/uploads/news/".$image_name;
+            $image -> move("uploads/news",$image_name);
+        }
+        $item->image =  $move_name ;
+
+        $item->content = $request->content;
+
+
+
         $save = $item->save();
+        $caco -> contents_id = $item -> id;
+        $caco -> save();
         if( $save ){
             return redirect()->route('news.index')->with('success', 'Kayıt Eklendi');
         }
@@ -59,8 +73,8 @@ class NewsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id){
-        $item = News::find($id);
-        $categories = Category::where('status', '1')->get();
+        $item = Contents::find($id);
+        $categories = Category::get();
         return view('panel.news.update', compact('item', 'categories'));
     }
 
@@ -72,15 +86,32 @@ class NewsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id){
-        $item = News::find($id);
-        $item->category_id = $request->category_id;
+        $item = Contents::find($id);
+
         $item->title = $request->title;
         $item->slug =  Str::slug($request->title);
-        $item->post_summery = $request->post_summery;
-        $item->desc = $request->desc;
-        $item->video = $request->video;
-        $item->rank = $request->rank;
-        $item->status = $request->status ? 1 : 0;
+
+        $item->content = $request->content;
+
+        if ( !empty(request() -> file("image"))) {
+            try {
+                unlink(trim($item -> image,"/"));
+            } catch (\Throwable $th) {
+
+            }
+            $image = request()-> file("image");
+            $image_name = $image-> hashName();
+            if ($image -> isValid() ) {
+                $move_name = "/uploads/news/".$image_name;
+                $image -> move("uploads/news",$image_name);
+            }
+            $item->image =  $move_name ;
+
+        }
+        else
+        {
+
+        }
         $save = $item->save();
         if( $save ){
             return redirect()->route('news.index')->with('success', 'Kayıt GÜncellendi');
@@ -94,7 +125,17 @@ class NewsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id){
-        News::destroy($id);
+        echo $id;
+        $item = Contents::find($id);
+        $image = $item -> image;
+
+        try {
+            unlink(trim($image,"/"));
+        } catch (\Throwable $th) {
+
+        }
+
+        Contents::destroy($id);
         return redirect()->route('news.index');
     }
 

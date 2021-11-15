@@ -30,7 +30,7 @@
                             <div class="post-content-area">
                                 <div class="post-media post-featured-image">
                                     <a href="{{$content->image}}" class="gallery-popup">
-                                        <img src="{{$content -> image}}" class="img-fluid" alt="">
+                                        <img  src="{{$content -> image}}" class="img-fluid img-thumbnail" alt="">
                                     </a>
                                 </div>
 

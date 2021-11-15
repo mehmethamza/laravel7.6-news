@@ -7,7 +7,7 @@
                 <!--nav top end-->
                 <nav class="navigation ts-main-menu navigation-landscape">
                     <div class="nav-header">
-                        <a class="nav-brand" href="index.html">
+                        <a class="nav-brand" href="/">
                             <img src="/images/logo/footer_logo.png" alt="">
                         </a>
                         <div class="nav-toggle"></div>

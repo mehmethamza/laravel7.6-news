@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\panel;
+
 
 use Illuminate\Http\Request;
 use App\Models\Image;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\ImageManagerStatic;
+use Intervention\Image\ImageManagerStatic::class;
 
 class ImageController extends Controller
 {
@@ -33,7 +34,7 @@ class ImageController extends Controller
         $cover = $isCover ? 0 : 1;
 
         $size = explode('x', $request->size);
-        
+
         $item = new Image();
         $item->url = $fileName;
         $item->category = $request->category;

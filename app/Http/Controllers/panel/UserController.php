@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\panel;
 
+use App\Models\panel\User as User;
 use Illuminate\Http\Request;
-use App\Models\User;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -96,5 +97,5 @@ class UserController extends Controller
         $data = $request->data === 'true' ? 1 : 0;
         User::where('id', $id)->update(['status' => $data]);
     }
-    
+
 }

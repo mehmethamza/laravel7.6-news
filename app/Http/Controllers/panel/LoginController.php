@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\panel;
+
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -17,7 +19,7 @@ class LoginController extends Controller
     }
     public function auth(Request $request){
         $request->flash();
-        
+
         $messages = [
             'required' => ':attribute alanı boş geçilemez.',
             'email' => 'E-posta adresinizi doğru giriniz..',
@@ -30,13 +32,17 @@ class LoginController extends Controller
         if ($validator->fails()) {
             return redirect()->route('panel.login')->withErrors($validator)->withInput();
         }
-        
+
 
         $credentials = $request->only('email', 'password');
+        if (auth() -> attempt(['email' => request("email") , 'password' => request("password")])) {
 
-        if (Auth::attempt($credentials)) {
             return redirect()->intended('news.index');
-        }else{
+           }
+        // if (Auth::attempt($credentials)) {
+        //     return redirect()->intended('news.index');
+        // }
+        else{
             return redirect()->route('panel.login')->with('error', 'Sistemde Kayıtlı Bilgi Bulunamadı');
         }
     }

@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\panel;
+
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class News extends Model
 {
-    use HasFactory;
-    
+
+
     public function category(){
         return $this->belongsToMany('App\Models\Category');
     }

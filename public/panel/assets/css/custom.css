@@ -1,0 +1,7 @@
+.spinner-border { display: none; }
+.table-disabled { position: absolute; z-index: 10; background-color: rgba(255, 255, 255, .70); left: 0; top: 0; right: 0; bottom: 0; display: flex; justify-content: center; align-items: center;  }
+.table-disabled .spinner-border { display: block; width: 50px; height: 50px; }
+.table-disabled.none { display: none; }
+.m-sortable .item-sortable { cursor: ns-resize !important; }
+.m-sortable .sortable-highlight { background-color: #efefef !important; height: 100px; }
+.table-hover tbody tr:hover { background-color: #f8f9fa; }
