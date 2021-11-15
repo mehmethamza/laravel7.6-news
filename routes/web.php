@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnasayfaController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\SearchController;
 use App\Models\Category;
 use App\Models\Contents;
 use Illuminate\Support\Facades\Route;
@@ -54,3 +55,4 @@ Route::get("/content/{slug}",[ContentController::class,"content"])->name("conten
 
 
 Route::get("/category/{slug}",[CategoryController::class,"category"]) -> name("category");
+Route::get("/search/{search}",[SearchController::class,"search"]) -> name("search");

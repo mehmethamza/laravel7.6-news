@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    {{$contents -> name}}
+    Aranan değer {{$search}}
 @endsection
 
 @section('content')
@@ -27,7 +27,7 @@
           <div class="ts-grid-box entry-header">
 
             <div class="clearfix entry-cat-header">
-              <h2 class="ts-title float-left">Category {{$contents -> name}} </h2>
+              <h2 class="ts-title float-left">Aranan Değer : {{$search}} </h2>
 
             </div>
           </div>
@@ -36,10 +36,10 @@
       <div class="row">
         <div class="col-lg-9">
           <div class="row">
-            @if ( count($contents -> contents) == 0)
+            @if ( count($contents) == 0)
                 Üzgünüz herhangi bir kayıt bulunamadı
             @else
-            @foreach ($contents -> contents as $content)
+            @foreach ($contents  as $content)
                 <div class="col-lg-6 mb-10">
                     <div class="ts-overlay-style">
                         <div class="item">

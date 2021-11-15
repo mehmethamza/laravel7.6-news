@@ -1,5 +1,5 @@
 <li>
-    <a href="#">{{$category -> name}}</a>
+    <a href="{{route("category",$category -> slug)}}">{{$category -> name}}</a>
     <div class="megamenu-panel">
         <div class="megamenu-tabs">
             <ul class="megamenu-tabs-nav">
@@ -9,11 +9,11 @@
                 @foreach ($category -> child as $key => $child_category)
                     @if ($key == 0)
                         <li class="active">
-                            <a href="#">{{$child_category -> name}} </a>
+                            <a href="{{ route("category",$child_category -> slug) }}">{{$child_category -> name}} </a>
                         </li>
                     @else
                     <li >
-                        <a href="#">{{$child_category -> name}} </a>
+                        <a href="{{ route("category",$child_category -> slug) }}">{{$child_category -> name}} </a>
                     </li>
                     @endif
 
@@ -32,12 +32,12 @@
                                 <div class="item">
 
                                     <div class="ts-post-thumb">
-                                        <a class="post-cat ts-purple-bg" href="#">
+                                        <a class="post-cat ts-purple-bg" href="{{ route("content",$content->slug)}}">
                                         @foreach ($content -> category as $category)
                                             {{$category -> name}}
                                         @endforeach
                                         </a>
-                                        <a href="{{ route("content",$content->slug)}}">
+                                        <a href="{{ route("content",$content->slug)}}" >
                                             <img class="img-fluid" src="{{ $content -> image}}" alt="">
                                         </a>
                                     </div>

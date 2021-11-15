@@ -1,5 +1,5 @@
 <li>
-    <a href="#">{{$category -> name}}</a>
+    <a href="{{route("category",$category -> slug)}}">{{$category -> name}}</a>
     <div class="megamenu-panel">
         <div class="row">
             @foreach ($category -> contents  as $key => $content)

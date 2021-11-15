@@ -1,11 +1,11 @@
 <li>
-    <a href="#">{{$category -> name}}</a>
+    <a href="{{route("category",$category -> slug)}}">{{$category -> name}}</a>
     <ul class="nav-dropdown">
 
         @foreach ($category -> child as $child_category)
 
             <li>
-            <a href="#">{{$child_category -> name }}</a>
+            <a href="{{route("category",$child_category -> slug)}}">{{$child_category -> name }}</a>
 
           </li>
         @endforeach

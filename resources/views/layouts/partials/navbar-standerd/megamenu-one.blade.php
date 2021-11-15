@@ -1,3 +1,3 @@
 <li>
-    <a href="category-1.html">{{$category -> name}}</a>
+    <a href="{{route("category",$category -> slug)}}">{{$category -> name}}</a>
 </li>
