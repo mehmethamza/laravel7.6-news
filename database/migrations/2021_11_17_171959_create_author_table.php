@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateContentsTable extends Migration
+class CreateAuthorTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,17 @@ class CreateContentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('contents', function (Blueprint $table) {
+        Schema::create('author', function (Blueprint $table) {
             $table->id();
-            $table -> string("title");
-            $table -> string("slug");
-            $table -> text("content");
-            $table -> string("image");
-            $table -> bigInteger("");
-
-
+            $table -> string("name");
+            $table -> string("twitter");
+            $table -> string("facebook");
+            $table -> string("google");
+            $table -> string("linkedin");
+            $table -> string("statement");
+            $table -> string("cinsiyet");
 
             $table->timestamps();
-            $table -> softDeletes();
         });
     }
 
@@ -35,6 +34,6 @@ class CreateContentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contents');
+        Schema::dropIfExists('author');
     }
 }
