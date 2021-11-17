@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnasayfaController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\panel\CategoryController as PanelCategoryController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\panel\LoginController;
 use App\Http\Controllers\panel\NewsController;
@@ -35,19 +36,8 @@ Route::get('/deneme', function () {
 
 Route::get('/deneme2', function () {
 
-    $categories = Category::inRandomOrder() ->get();
-
-
-    foreach ($categories  as  $category) {
-        echo count($category -> contents);
-        if (count($category -> contents) >= 2) {
-            echo "<br>";
-            echo "büyük";
-            break;
-        }
-        echo "<br>";
-    }
-
+    $category = Category::find(11);
+    return $category -> parent -> name;
 
 
  });
@@ -79,13 +69,13 @@ Route::group(["prefix" => "yonetim", "namespace" => "panel"] ,function () {
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::name('category.')->middleware('auth')->group(function () {
-        Route::get('category', [CategoryController::class, 'index'])->name('index');
-        Route::get('category/create', [CategoryController::class, 'create'])->name('create');
-        Route::post('category/store', [CategoryController::class, 'store'])->name('store');
-        Route::get('category/edit/{id}', [CategoryController::class, 'edit'])->name('edit');
-        Route::post('category/update/{id}', [CategoryController::class, 'update'])->name('update');
-        Route::get('category/destroy/{id}', [CategoryController::class, 'destroy'])->name('destroy');
-        Route::post('category/status/{id}', [CategoryController::class, 'status'])->name('status');
+        Route::get('category', [PanelCategoryController::class, 'index'])->name('index');
+        Route::get('category/create', [PanelCategoryController::class, 'create'])->name('create');
+        Route::post('category/store', [PanelCategoryController::class, 'store'])->name('store');
+        Route::get('category/edit/{id}', [PanelCategoryController::class, 'edit'])->name('edit');
+        Route::post('category/update/{id}', [PanelCategoryController::class, 'update'])->name('update');
+        Route::get('category/destroy/{id}', [PanelCategoryController::class, 'destroy'])->name('destroy');
+        Route::post('category/status/{id}', [PanelCategoryController::class, 'status'])->name('status');
     });
     Route::name('news.')->middleware('auth')->group(function () {
         Route::get('news', [NewsController::class, 'index'])->name('index');

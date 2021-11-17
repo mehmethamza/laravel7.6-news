@@ -13,6 +13,10 @@ class Category extends Model
         return $this-> hasMany("App\Models\Category","pid");
     }
 
+    public function parent(){
+        return $this-> belongsTo("App\Models\Category","pid");
+    }
+
     public function contents(){
         return $this -> belongsToMany("App\Models\Contents","caco") ;
     }

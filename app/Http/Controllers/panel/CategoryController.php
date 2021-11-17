@@ -6,7 +6,9 @@ namespace App\Http\Controllers\panel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\panel\Category as PanelCategory;
 use Illuminate\Support\Str;
+
 
 class CategoryController extends Controller
 {
@@ -26,7 +28,8 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(){
-        return view('panel.category.create');
+        $categories = Category::where("pid",0) -> get();
+        return view('panel.category.create',compact("categories"));
     }
 
     /**
@@ -36,11 +39,26 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-        $item = new Category;
+        $item = new PanelCategory();
         $item->name = $request->name;
         $item->slug =  Str::slug($request->name);
-        $item->rank = $request->rank;
-        $item->status = $request->status ? 1 : 0;
+
+        switch ($request -> turu) {
+            case 'ana':
+
+                $item -> pid = 0;
+                $item -> type = $request -> type;
+                break;
+            case 'alt':
+                $item -> pid = $request -> category_id;
+                $item -> type = Null;
+                break;
+
+            default:
+                # code...
+                break;
+        }
+
         $save = $item->save();
         if( $save ){
             return redirect()->route('category.index')->with('success', 'Kayıt Eklendi');
@@ -84,8 +102,8 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id){
-        Category::destroy($id);
-        return redirect()->route('category.index');
+        PanelCategory::destroy($id);
+        return redirect()->route('category.index')->with('success', 'Kayıt Silindi');
     }
 
     /**

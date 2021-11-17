@@ -37,7 +37,7 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
         if (auth() -> attempt(['email' => request("email") , 'password' => request("password")])) {
 
-            return redirect()->intended('news.index');
+            return redirect()->route('news.index');
            }
         // if (Auth::attempt($credentials)) {
         //     return redirect()->intended('news.index');

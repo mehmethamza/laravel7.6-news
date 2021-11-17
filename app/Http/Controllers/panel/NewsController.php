@@ -88,6 +88,9 @@ class NewsController extends Controller
     public function update(Request $request, $id){
         $item = Contents::find($id);
 
+        Caco::where("contents_id",$id)-> delete();
+        $caco = new Caco;
+
         $item->title = $request->title;
         $item->slug =  Str::slug($request->title);
 
@@ -113,6 +116,10 @@ class NewsController extends Controller
 
         }
         $save = $item->save();
+
+        $caco -> contents_id = $item -> id;
+        $caco -> category_id = $request -> category_id;
+        $caco -> save();
         if( $save ){
             return redirect()->route('news.index')->with('success', 'Kayıt GÜncellendi');
         }

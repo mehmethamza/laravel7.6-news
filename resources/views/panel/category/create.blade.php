@@ -1,3 +1,4 @@
+
 @extends('panel.layout.master')
 
 @section('title', 'Kategori Ekle')
@@ -21,39 +22,64 @@
                             @csrf
                             <div class="card-body">
                                 <div class="mb-15">
-                                    
+
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label text-right">Kategori Adı</label>
                                         <div class="col-lg-6">
                                             <input type="text" class="form-control" name="name" class="{{ old('name') }}" placeholder="" />
                                         </div>
                                     </div>
+
+
                                     <div class="form-group row">
-                                        <label class="col-lg-3 col-form-label text-right">Sıra</label>
+                                        <label class="col-lg-3 col-form-label  text-right">Türü</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="rank" value="{{ old('rank') }}" placeholder="" />
+                                            <select class="form-control select2 kt_select2 turu " onchange="getir()" name="turu" required>
+                                                <option value=""></option>
+                                                <option value="ana">Ana Kategori</option>
+                                                <option value="alt">Alt Kategori</option>
+
+                                            </select>
                                         </div>
                                     </div>
-                                    
-                                    <div class="form-group row">
-                                        <label class="col-3 col-form-label text-right">Durum</label>
-                                        <div class="col-3">
-                                            <span class="switch switch-outline switch-icon switch-primary">
-                                                <label>
-                                                    <input type="checkbox" checked="checked" name="status" />
-                                                    <span></span>
-                                                </label>
-                                            </span>
+
+                                    <div class="form-group row tipi"  style="display: none">
+                                        <label class="col-lg-3 col-form-label text-right">Tipi</label>
+                                        <div class="col-lg-6">
+                                            <select class="form-control select2 kt_select2" name="type" >
+                                                <option value=""></option>
+                                                <option value="one">One</option>
+                                                <option value="panel">Panel</option>
+                                                <option value="tabs">Tabs</option>
+                                                <option value="navdown">Navdown</option>
+
+                                            </select>
                                         </div>
                                     </div>
-                                    
+
+                                    <div class="form-group row ana" style="display: none">
+                                        <label class="col-lg-3 col-form-label text-right">Ana Kategorisi</label>
+                                        <div class="col-lg-6">
+                                            <select class="form-control select2 kt_select2"    name="category_id" >
+                                                <option value=""></option>
+                                                @foreach ($categories as $item)
+                                                <option value="{{$item -> id }}">{{$item -> name}}</option>
+
+                                                @endforeach
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+
                                 </div>
                             </div>
                             <div class="card-footer">
                                 <div class="row">
                                     <div class="col-lg-3"></div>
                                     <div class="col-lg-6">
-                                        <button type="submit" class="btn font-weight-bold btn-primary mr-2">
+                                        <button  class="btn font-weight-bold btn-primary mr-2" type="submit" >
                                             <span>KAYDET</span>
                                             <div class="spinner-border text-light" role="status">
                                                 <span class="sr-only">Loading...</span>
@@ -75,9 +101,45 @@
     <!--end::Content-->
 @endsection
 
+
+
 @section('pageJs')
-    <script src="/assets/plugins/custom/ckeditor/ckeditor-classic.bundle.js"></script>
-    <script src="/assets/js/pages/crud/forms/editors/ckeditor-classic.js"></script>
-    <script src="/assets/js/pages/crud/forms/widgets/select2.js"></script>
-    <script src="/assets/plugins/custom/loading.js"></script>
+<script>
+
+    var tipi = document.querySelector(".tipi");
+    var turu = document.querySelector(".turu");
+    var ana = document.querySelector(".ana");
+
+    function getir() {
+        switch (turu.value) {
+            case "ana":
+                tipi.style.display = "none";
+                ana.style.display = "none";
+                tipi.style.display = '';
+
+                break;
+
+            case "alt":
+                tipi.style.display = "none";
+                ana.style.display = "none";
+                ana.style.display = '';
+
+
+                break;
+            default:
+                break;
+        }
+    }
+
+
+
+
+
+
+
+
+
+</script>
+    <script src="/panel/assets/js/pages/crud/forms/widgets/select2.js"></script>
+    <script src="/panel/assets/plugins/custom/loading.js"></script>
 @endsection

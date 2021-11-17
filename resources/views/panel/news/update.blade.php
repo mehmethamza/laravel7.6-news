@@ -27,16 +27,29 @@
                                         <div class="col-lg-6">
                                             <select class="form-control select2 kt_select2" name="category_id" required>
                                                 <option value=""></option>
-                                                @foreach ($item -> category as $itemc)
-                                                    @php
-                                                        $itemca = $itemc -> name;
+                                                @if (!empty($item -> category[0]))
 
-                                                    @endphp
 
-                                                @endforeach
-                                                @foreach( $categories as $cat )
-                                                <option @if($cat-> name == $itemca ) selected @endif value="{{ $cat->id }}">{{ $cat->name }}</option>
-                                                @endforeach
+                                                    @foreach ($item -> category as $itemc)
+                                                        @php
+                                                            $itemca = $itemc -> name;
+
+                                                        @endphp
+
+                                                    @endforeach
+                                                    @foreach( $categories as $cat )
+
+                                                    <option @if($cat-> name == $itemca ) selected @endif value="{{ $cat->id }}">{{ $cat->name }} </option>
+                                                    @endforeach
+
+
+
+                                                @endif
+                                                    @foreach( $categories as $cat )
+
+                                                    <option  value="{{ $cat->id }}">{{ $cat->name }} </option>
+                                                    @endforeach
+
                                             </select>
                                         </div>
                                     </div>
