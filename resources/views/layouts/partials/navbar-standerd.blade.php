@@ -8,7 +8,7 @@
                 <nav class="navigation ts-main-menu navigation-landscape">
                     <div class="nav-header">
                         <a class="nav-brand" href="/">
-                            <img src="/images/logo/footer_logo.png" alt="">
+                            <img src="{{$setting -> logo}}" alt="">
                         </a>
                         <div class="nav-toggle"></div>
                     </div>
@@ -27,10 +27,10 @@
                                     <div class="nav-search-button">
                                         <i class="icon icon-search"></i>
                                     </div>
-                                    <form>
+                                    <form method="GET" action="{{route("search")}}">
                                         <span class="nav-search-close-button" tabindex="0">✕</span>
                                         <div class="nav-search-inner">
-                                            <input type="search" name="search" placeholder="Type and hit ENTER">
+                                            <input type="search" name="query" placeholder="Type and hit ENTER">
                                         </div>
                                     </form>
                                 </div>

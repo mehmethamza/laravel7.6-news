@@ -4,13 +4,15 @@ namespace App\Http\Controllers\panel;
 
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Author;
 use App\Models\Category;
-use App\Models\panel\Category as PanelCategory;
+use App\Models\panel\Author as PanelAuthor;
+use Illuminate\Http\Request;
+
 use Illuminate\Support\Str;
 
 
-class CategoryController extends Controller
+class AuthorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +20,8 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $items = Category::all();
-        return view('panel.category.list', compact('items'));
+        $authors = Author::all();
+        return view('panel.author.list', compact('authors'));
     }
 
     /**
@@ -29,7 +31,7 @@ class CategoryController extends Controller
      */
     public function create(){
         $categories = Category::where("pid",0) -> get();
-        return view('panel.category.create',compact("categories"));
+        return view('panel.author.create',compact("categories"));
     }
 
     /**
@@ -39,19 +41,23 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-        $item = new Category();
+        $item = new PanelAuthor();
         $item->name = $request->name;
-        $item->slug =  Str::slug($request->name);
+        $item->facebook = $request->facebook;
+        $item->twitter = $request->twitter;
+        $item->linkedin = $request->linkedin;
+        $item->google = $request->google;
+        $item->statement = $request->statement;
+        $item->cinsiyet = $request->cinsiyet;
+        switch ($request -> cinsiyet) {
+            case 'erkek':
+                $item -> image = "/images/avater/author2.png";
 
-        switch ($request -> turu) {
-            case 'ana':
-
-                $item -> pid = 0;
-                $item -> type = $request -> type;
                 break;
-            case 'alt':
-                $item -> pid = $request -> category_id;
-                $item -> type = Null;
+            case 'kadin':
+                $item -> image = "/images/avater/author.png";
+
+
                 break;
 
             default:
@@ -59,9 +65,11 @@ class CategoryController extends Controller
                 break;
         }
 
+
+
         $save = $item->save();
         if( $save ){
-            return redirect()->route('category.index')->with('success', 'Kayıt Eklendi');
+            return redirect()->route('author.index')->with('success', 'Kayıt Eklendi');
         }
     }
 
@@ -72,9 +80,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id){
-        $item = Category::find($id);
-        $categories = Category::where("pid",0) -> get();
-        return view('panel.category.update', compact('item',"categories"));
+
+        $item = Author::find($id);
+        return view('panel.author.update', compact('item'));
     }
 
     /**
@@ -84,21 +92,36 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id){
-        $item = Category::find($id);
+    public function update(Request $request , $id){
+        $item = Author::find($id);
         $item->name = $request->name;
-        $item->slug =  Str::slug($request->name);
+        $item->facebook = $request->facebook;
+        $item->twitter = $request->twitter;
+        $item->linkedin = $request->linkedin;
+        $item->google = $request->google;
+        $item->statement = $request->statement;
+        $item->cinsiyet = $request->cinsiyet;
+        switch ($request -> cinsiyet) {
+            case 'erkek':
+                $item -> image = "/images/avater/author2.png";
+
+                break;
+            case 'kadin':
+                $item -> image = "/images/avater/author.png";
 
 
-        if ($item -> id == 0) {
-            $item -> type = $request -> type;
+                break;
+
+            default:
+                # code...
+                break;
         }
-        else {
-            $item -> pid = $request -> category_id;
-        }
+
+
+
         $save = $item->save();
         if( $save ){
-            return redirect()->route('category.index')->with('success', 'Kayıt Güncellendi');
+            return redirect()->route('author.index')->with('success', 'Kayıt Güncellendi');
         }
     }
 
@@ -109,8 +132,8 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id){
-        Category::destroy($id);
-        return redirect()->route('category.index')->with('success', 'Kayıt Silindi');
+        Author::destroy($id);
+        return redirect()->route('author.index')->with('success', 'Kayıt Silindi');
     }
 
     /**

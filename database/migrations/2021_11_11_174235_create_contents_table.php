@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateContentsTable extends Migration
@@ -13,19 +14,22 @@ class CreateContentsTable extends Migration
      */
     public function up()
     {
+
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
             $table -> string("title");
             $table -> string("slug");
             $table -> text("content");
             $table -> string("image");
-            $table -> bigInteger("");
+            $table -> integer ("author_id") -> nullable() ;
+
 
 
 
             $table->timestamps();
             $table -> softDeletes();
         });
+
     }
 
     /**

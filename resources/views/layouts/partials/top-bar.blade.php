@@ -8,17 +8,17 @@
                     <div class="breaking-news-content float-left" id="breaking_slider1">
                         <div class="breaking-post-content">
                             <p>
-                                <a href="#">Parquet Courts on Resisting Nihilism & Why Tourism in Dubai is booming the world.</a>
+                                <a>{{$setting -> braking}}</a>
                             </p>
                         </div>
                         <div class="breaking-post-content">
                             <p>
-                                <a href="#">Parquet Courts on Resisting Nihilism & Why Tourism in Dubai is booming the world.</a>
+                                <a >{{$setting -> braking}}</a>
                             </p>
                         </div>
                         <div class="breaking-post-content">
                             <p>
-                                <a href="#">Parquet Courts on Resisting Nihilism & Why Tourism in Dubai is booming the world.</a>
+                                <a >{{$setting -> braking}}</a>
                             </p>
                         </div>
                     </div>
@@ -29,7 +29,9 @@
             <div class="col-md-4 text-right xs-left">
                 <div class="ts-date-item">
                     <i class="fa fa-clock-o"></i>
-                    Sunday, August 24
+                    @php
+                        echo Carbon\Carbon::now()->isoFormat('dddd D');
+                    @endphp
                 </div>
             </div>
             <!--end col -->

@@ -44,7 +44,9 @@
                                                 @endforeach
                                             </a>
                                         </li>
-                                        @include('content.content-author')
+
+                                        @if ( !empty($content -> author)) @include('content.content-author')@endif
+
                                         <li>
                                             <i class="fa fa-clock-o"></i>
                                             @php
@@ -60,7 +62,15 @@
                                 <!-- entry content end-->
                             </div>
                             <!-- post content area-->
-                            @include('content.author')
+
+                            @if ( !empty($content -> author))@include('content.author')@endif
+
+
+
+
+
+
+
 
                             <!-- author box end-->
                             @include('content.post-nagivate')

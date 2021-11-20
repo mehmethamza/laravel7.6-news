@@ -13,7 +13,7 @@
                 <div class="card card-custom">
                     <div class="card-header flex-wrap py-5">
                         <div class="card-title">
-                            <h3 class="card-label">Kategori Güncelle</h3>
+                            <h3 class="card-label">Site Ayarları</h3>
                         </div>
                     </div>
                     <div class="card-body">
@@ -24,45 +24,35 @@
                                 <div class="mb-15">
 
                                     <div class="form-group row">
-                                        <label class="col-lg-3 col-form-label text-right">Kategori Adı</label>
+                                        <label class="col-lg-3 col-form-label text-right">Kayan Yazı</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="name" value="{{ $item -> name}}" class="{{ old('name') }}" placeholder="" />
+                                            <input type="text" class="form-control" name="braking" value="{{ $item -> braking}}" class="{{ old('name') }}" placeholder="" />
                                         </div>
                                     </div>
-
-
-
-                                    @if ($item -> pid == "0")
-
-
-                                    <div class="form-group row "  >
-                                        <label class="col-lg-3 col-form-label text-right">Tipi</label>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label text-right">Facebook</label>
                                         <div class="col-lg-6">
-                                            <select class="form-control select2 kt_select2" name="type" >
-                                                <option value=""></option>
-                                                <option @if($item -> type == "one") selected @endif  value="one">One</option>
-                                                <option @if($item -> type == "panel") selected @endif value="panel">Panel</option>
-                                                <option @if($item -> type == "tabs") selected @endif value="tabs">Tabs</option>
-                                                <option @if($item -> type == "navdown") selected @endif value="navdown">Navdown</option>
-
-                                            </select>
+                                            <input type="text" class="form-control" name="facebook" value="{{ $item -> facebook}}" class="{{ old('name') }}" placeholder="" />
                                         </div>
                                     </div>
-                                    @else
-                                    <div class="form-group row " >
-                                        <label class="col-lg-3 col-form-label text-right">Ana Kategorisi</label>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label text-right">Twitter</label>
                                         <div class="col-lg-6">
-                                            <select class="form-control select2 kt_select2"    name="category_id" >
-                                                <option value=""></option>
-                                                @foreach ($categories as $category)
-                                                <option @if($item -> pid == $category ->id) selected  @endif value="{{$category -> id }}">{{$category -> name}}</option>
-
-                                                @endforeach
-
-                                            </select>
+                                            <input type="text" class="form-control" name="twitter" value="{{ $item -> twitter}}" class="{{ old('name') }}" placeholder="" />
                                         </div>
                                     </div>
-                                    @endif
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label text-right"> Pinterest</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" name="pinteret" value="{{ $item -> pinterest}}" class="{{ old('name') }}" placeholder="" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label text-right">Google</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" name="google" value="{{ $item -> google}}" class="{{ old('name') }}" placeholder="" />
+                                        </div>
+                                    </div>
 
 
 

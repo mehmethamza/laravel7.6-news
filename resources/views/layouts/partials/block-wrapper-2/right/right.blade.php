@@ -6,34 +6,34 @@
             </h3>
             <ul class="ts-block-social-list">
                 <li class="ts-facebook">
-                    <a href="#">
+                    <a href="{{$setting -> facebook}}">
                         <i class="fa fa-facebook"></i>
                         <b>facebook </b>
-                        <span>1.5 k</span>
+
                     </a>
 
                 </li>
                 <li class="ts-google-plus">
-                    <a href="#">
+                    <a href="{{$setting -> google}}">
                         <i class="fa fa-google-plus"></i>
                         <b>Google Plus </b>
-                        <span>1.5 k</span>
+
                     </a>
 
                 </li>
                 <li class="ts-twitter">
-                    <a href="#">
+                    <a href="{{$setting -> twitter}}">
                         <i class="fa fa-twitter"></i>
                         <b>Twitter </b>
-                        <span>1.5 k</span>
+
                     </a>
 
                 </li>
                 <li class="ts-pinterest">
-                    <a href="#">
+                    <a href="{{$setting -> pinterest}}">
                         <i class="fa fa-pinterest-p"></i>
-                        <b>facebook </b>
-                        <span>1.5 k</span>
+                        <b>Pinterest </b>
+
                     </a>
 
                 </li>
@@ -58,7 +58,7 @@
         <!-- end-->
         <div class="widgets widgets-item widget-banner">
             <a href="#">
-                <img class="img-fluid" src="/images/banner/sidebar-banner1.jpg" alt="">
+                <img class="img-fluid" src="{{$setting -> ad1}}" alt="">
             </a>
         </div>
         <!-- widgets end-->
@@ -70,19 +70,16 @@
                 <div class="item">
                     <div class="ts-post-thumb">
                         <a href="#">
-                            <img class="img-fluid" src="/images/news/travel/travel8.jpg" alt="">
+                            <img class="img-fluid" src="{{$block_wrapper_2_right[0] -> image}}" alt="">
                         </a>
                     </div>
                     <div class="overlay-post-content">
                         <div class="post-content">
                             <h3 class="post-title">
-                                <a href="#">Tourism in Dubai is boom international tourist</a>
+                                <a href="{{route("content",$block_wrapper_2_right[0] -> slug)}}">{{$block_wrapper_2_right[0] -> title}}</a>
                             </h3>
                             <ul class="post-meta-info">
-                                <li>
-                                    <i class="fa fa-clock-o"></i>
-                                    March 21, 2019
-                                </li>
+
                             </ul>
                         </div>
                     </div>
@@ -91,19 +88,20 @@
             <!-- ts-overlay-style  end-->
 
             <div class="post-content media">
-                <img class="d-flex sidebar-img" src="/images/news/health/health8.jpg" alt="">
+                <img class="d-flex sidebar-img" src="{{$block_wrapper_2_right[1] -> image}}" alt="">
                 <div class="media-body align-self-center">
                     <h4 class="post-title">
-                        <a href="">18 month shoots himself by gun </a>
+                        <a href="{{route("content",$block_wrapper_2_right[1] -> slug)}}">{{$block_wrapper_2_right[1] -> title}}</a>
                     </h4>
                 </div>
             </div>
             <!-- post content end-->
             <div class="post-content media">
-                <img class="d-flex sidebar-img" src="/images/news/health/health3.jpg" alt="">
+                <img class="d-flex sidebar-img" src="{{$block_wrapper_2_right[2] -> image}}" alt="">
                 <div class="media-body align-self-center">
                     <h4 class="post-title">
-                        <a href="">18 month shoots himself by gun </a>
+                        <a href="{{route("content",$block_wrapper_2_right[2] -> slug)}}">{{$block_wrapper_2_right[2] -> title}}</a>
+
                     </h4>
                 </div>
             </div>

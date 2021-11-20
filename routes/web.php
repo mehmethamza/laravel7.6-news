@@ -7,8 +7,11 @@ use App\Http\Controllers\panel\CategoryController as PanelCategoryController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\panel\LoginController;
 use App\Http\Controllers\panel\NewsController;
+use App\Http\Controllers\panel\AuthorController;
+use App\Http\Controllers\panel\Auth;
 
 use App\Http\Controllers\panel\ImageController;
+use App\Http\Controllers\panel\SettingController;
 use App\Models\Category;
 use App\Models\Contents;
 use Illuminate\Support\Facades\Route;
@@ -40,8 +43,14 @@ Route::get('/deneme2', function () {
     return $category -> parent -> name;
 
 
- });
+});
 
+Route::get('/deneme3', function () {
+
+    $category = Contents::find(11);
+    return $category -> author ;
+
+});
 
 
 
@@ -50,7 +59,7 @@ Route::get("/content/{slug}",[ContentController::class,"content"])->name("conten
 
 
 Route::get("/category/{slug}",[CategoryController::class,"category"]) -> name("category");
-Route::get("/search/{search}",[SearchController::class,"search"]) -> name("search");
+Route::get("/search/",[SearchController::class,"search"]) -> name("search");
 
 
 
@@ -76,6 +85,24 @@ Route::group(["prefix" => "yonetim", "namespace" => "panel"] ,function () {
         Route::post('category/update/{id}', [PanelCategoryController::class, 'update'])->name('update');
         Route::get('category/destroy/{id}', [PanelCategoryController::class, 'destroy'])->name('destroy');
         Route::post('category/status/{id}', [PanelCategoryController::class, 'status'])->name('status');
+    });
+    Route::name('setting.')->middleware('auth')->group(function () {
+        Route::get('setting', [SettingController::class, 'index'])->name('index');
+        // Route::get('setting/create', [SettingController::class, 'create'])->name('create');
+        // Route::post('setting/store', [SettingController::class, 'store'])->name('store');
+        Route::get('setting/edit/{id}', [SettingController::class, 'edit'])->name('edit');
+        Route::post('setting/update/{id}', [SettingController::class, 'update'])->name('update');
+        // Route::get('setting/destroy/{id}', [SettingController::class, 'destroy'])->name('destroy');
+        Route::post('setting/status/{id}', [SettingController::class, 'status'])->name('status');
+    });
+    Route::name('author.')->middleware('auth')->group(function () {
+        Route::get('author', [AuthorController::class, 'index'])->name('index');
+        Route::get('author/create', [AuthorController::class, 'create'])->name('create');
+        Route::post('author/store', [AuthorController::class, 'store'])->name('store');
+        Route::get('author/edit/{id}', [AuthorController::class, 'edit'])->name('edit');
+        Route::post('author/update/{id}', [AuthorController::class, 'update'])->name('update');
+        Route::get('author/destroy/{id}', [AuthorController::class, 'destroy'])->name('destroy');
+        Route::post('author/status/{id}', [AuthorController::class, 'status'])->name('status');
     });
     Route::name('news.')->middleware('auth')->group(function () {
         Route::get('news', [NewsController::class, 'index'])->name('index');

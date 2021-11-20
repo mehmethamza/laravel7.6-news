@@ -12,11 +12,13 @@
                         <a href="{{ route("content",$block_wrapper_1[0] ->slug)}}">{{$block_wrapper_1[0] -> title}}</a>
                     </h2>
                     <ul class="post-meta-info">
+                        @if ( !empty($block_wrapper_1[0]  -> author))
                         <li class="author">
                             <a href="#">
-                                <img src="images/avater/author1.jpg" alt=""> Donald Ramos
+                                <img src="{{$block_wrapper_1[0] -> author -> image}}" alt=""> {{$block_wrapper_1[0] -> author -> name}}
                             </a>
                         </li>
+                        @endif
                         <li>
                             <i class="fa fa-clock-o"></i>
                             @php

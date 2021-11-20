@@ -7,10 +7,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\panel\Category as PanelCategory;
+use App\Models\Setting;
 use Illuminate\Support\Str;
 
 
-class CategoryController extends Controller
+class SettingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +19,8 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $items = Category::all();
-        return view('panel.category.list', compact('items'));
+        $item = Setting::first();
+        return view('panel.setting.update', compact('item'));
     }
 
     /**

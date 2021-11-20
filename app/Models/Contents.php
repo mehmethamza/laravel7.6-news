@@ -12,4 +12,7 @@ class Contents extends Model
    public function category(){
        return $this -> belongsToMany(Category::class,"caco");
    }
+   public function author(){
+        return $this -> belongsTo("App\Models\Author","author_id");
+   }
 }

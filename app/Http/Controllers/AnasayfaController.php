@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Contents;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class AnasayfaController extends Controller
@@ -26,8 +27,11 @@ class AnasayfaController extends Controller
         $block_wrapper_2_2 = $this -> select(Category::inRandomOrder() ->get(),2) ;
         $block_wrapper_2_3 = Contents::all() -> random(4) ;
 
-        $block_wrapper_3 = Contents::orderBy('created_at', 'ASC') -> take(4) -> get() ;
+        $block_wrapper_3 = Contents::orderBy('created_at', 'DESC') -> take(4) -> get() ;
 
-        return view("welcome",compact("categories","block_wrapper_1","block_wrapper_2_1","block_wrapper_2_2","block_wrapper_2_3","block_wrapper_3"));
+        $setting = Setting::first();
+        $block_wrapper_2_right = Contents::all() -> random(3);
+
+        return view("welcome",compact("categories","block_wrapper_1","block_wrapper_2_1","block_wrapper_2_2","block_wrapper_2_3","block_wrapper_3","setting","block_wrapper_2_right","block_wrapper_2_right"));
     }
 }

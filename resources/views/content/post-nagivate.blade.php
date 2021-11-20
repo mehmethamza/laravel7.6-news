@@ -1,19 +1,19 @@
 <div class="post-navigation clearfix">
     <div class="post-previous float-left">
-        <a href="#">
-            <img src="/images/news/travel/travel6.jpg" alt="">
+        <a href="{{route("content",$content_sliders[0] -> slug)}}">
+            <img src="{{$content_sliders[0] -> image}}" alt="">
             <span>Read Previous</span>
             <p>
-                Samsung goes big in India factory ever created
+                {{$content_sliders[0] -> title}}
             </p>
         </a>
     </div>
     <div class="post-next float-right">
-        <a href="#">
-            <img src="/images/news/tech/tech5.jpg" alt="">
+        <a href="{{route("content",$content_sliders[1] -> slug)}}">
+            <img src="{{$content_sliders[1] -> image}}" alt="">
             <span>Read Next</span>
             <p>
-                Samsung goes big in India factory ever created
+                {{$content_sliders[1] -> title}}
             </p>
         </a>
     </div>

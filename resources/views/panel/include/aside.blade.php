@@ -60,6 +60,24 @@
                 </li>
 
                 <li class="menu-item" aria-haspopup="true">
+                    <a href="{{ route('author.index') }}" class="menu-link">
+                        <span class="menu-icon">
+                            <i class="fas fa-users"></i>
+                        </span>
+                        <span class="menu-text">Yazarlar</span>
+                    </a>
+                </li>
+
+                <li class="menu-item" aria-haspopup="true">
+                    <a href="{{ route('setting.index') }}" class="menu-link">
+                        <span class="menu-icon">
+                            <i class="fas fa-cog"></i>
+                        </span>
+                        <span class="menu-text">Ayarlar</span>
+                    </a>
+                </li>
+
+                <li class="menu-item" aria-haspopup="true">
                     <a href="{{ route('user.index') }}" class="menu-link">
                         <span class="menu-icon">
                             <i class="fas fa-user-lock"></i>
@@ -67,6 +85,8 @@
                         <span class="menu-text">Kullanıcılar</span>
                     </a>
                 </li>
+
+
 
                 <li class="menu-item" aria-haspopup="true">
                     <a href="{{ route('logout') }}" class="menu-link">
