@@ -97,7 +97,26 @@
 
 
 
+        <script>
+            var pid = document.querySelector(".pid");
+            var iptal = document.querySelector(".iptal");
+            var iptalicerik = document.querySelector(".iptalicerik");
 
+
+            function yaz(num,name) {
+
+                  pid.value = num;
+                  iptal.style.display = "";
+
+                  iptalicerik.textContent = name +"'dan alıntı ";
+            }
+            function kaldir(num) {
+
+                  pid.value = num;
+                  iptal.style.display = "none";
+
+            }
+       </script>
 		<!-- footer social list start-->
         @include('layouts.partials.footer-social')
 
@@ -112,6 +131,7 @@
         @include('layouts.partials.footer')
 
 		<!-- footer end -->
+
 
 
 	</div>

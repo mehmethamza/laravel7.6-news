@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnasayfaController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\panel\CategoryController as PanelCategoryController;
 use App\Http\Controllers\SearchController;
@@ -62,6 +63,10 @@ Route::get("/category/{slug}",[CategoryController::class,"category"]) -> name("c
 Route::get("/search/",[SearchController::class,"search"]) -> name("search");
 
 
+Route::name("comment.")-> group(function (){
+
+    Route::post("/comment/add",[CommentController::class,"add"]) -> name("add");
+});
 
 
 

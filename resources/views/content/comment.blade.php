@@ -1,57 +1,43 @@
 <div class="comments-form ts-grid-box">
 
-    <h3 class="comments-counter">03 Comments</h3>
+    <h3 class="comments-counter">{{ $comments -> count() }} Comments</h3>
     <ul class="comments-list">
+        @foreach ($comments as $comment)
+
+
         <li>
             <div class="comment">
-                <img class="comment-avatar float-left" alt="" src="/images/avater/author.png">
+                <img class="comment-avatar float-left" alt="" src="{{$comment -> image}}">
                 <div class="comment-body">
-                    <div class="meta-data"><span class="float-right"><a class="comment-reply" href="#"><i 	class="fa fa-mail-reply-all"></i> Reply</a></span>
-                        <span class="comment-author">Demon Lion</span><span class="comment-date">October 31, 2018</span>
+                    <div class="meta-data"><span class="float-right"><a onclick="yaz('{{  encrypt($comment -> id) }}' , '{{$comment -> name}}' )" class="comment-reply reply" href="javascript:;"><i class="fa fa-mail-reply-all"></i> Reply</a></span>
+                        <span class="comment-author">{{$comment -> name}}</span><span class="comment-date">October 31, 2018</span>
                     </div>
                     <div class="comment-content">
-                        <p>There’s such a thing as “too much information”, especially for the companies scaling out their sales operations. That’s why Attentive was help sales teams </p>
+                        <p>{{$comment -> comment}}</p>
                     </div>
                 </div>
             </div>
-            <!-- Comments end-->
-            <ul class="comments-reply">
-                <li>
-                    <div class="comment">
-                        <img class="comment-avatar float-left" alt="" src="/images/avater/author2.png">
-                        <div class="comment-body reply-bg">
-                            <div class="meta-data"><span class="float-right"><a class="comment-reply" href="#"><i class="fa fa-mail-reply-all"></i> Reply</a></span>
-                                <span class="comment-author">Henry kendel</span><span class="comment-date">October 31, 2018</span>
-                            </div>
-                            <div class="comment-content">
-                                <p>There’s such a thing as “too much information”, especially for the companies scaling out their sales operations. That’s why Attentive was born</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Comments end-->
-                </li>
-            </ul>
+            @if (!empty($comment -> child[0]))
+                @include('content.comment_child')
+            @endif
+
             <!-- comments-reply end-->
         </li>
-        <!-- Comments-list li end-->
-        <li>
-            <div class="comment last">
-                <img class="comment-avatar float-left" alt="" src="/images/avater/author.png">
-                <div class="comment-body">
-                    <div class="meta-data"><span class="float-right"><a class="comment-reply" href="#"><i 	class="fa fa-mail-reply-all"></i> Reply</a></span>
-                        <span class="comment-author">Demon Lion</span><span class="comment-date">October 31, 2018</span>
-                    </div>
-                    <div class="comment-content">
-                        <p>Cras lectus sed arcus volutpat tincidun met diam placerat.Vis solum numquam. That’s why Attentive help sales teams </p>
-                    </div>
-                </div>
-            </div><!-- Comments last end-->
-        </li>
+        @endforeach
+
+
     </ul>
     <!-- Comments-list ul end-->
-
-    <h3 class="comment-reply-title">Add Comment</h3>
-    <form role="form" class="ts-form">
+    <style>
+        .kirmizi:hover{
+            color: red;
+        }
+    </style>
+    <h3 class="comment-reply-title">Add Comment   </h3> <div style="display: none"  class="iptal" > <span class="iptalicerik"></span>  <span  class="kirmizi"  onclick=" kaldir( '{{encrypt(0)}}' ) "><i  class="fas fa-times"></i></span></div>
+    <form role="form" method="POST" action="{{route("comment.add")}}" class="ts-form">
+        @csrf
+        <input type="hidden" name="content_id" value="{{encrypt($content -> id) }}">
+        <input type="hidden" class="pid" name="pid" value="{{encrypt(0)}}">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -59,32 +45,43 @@
                 </div>
                 <!-- form group end-->
                 <div class="form-group">
-                    <input class="form-control" name="email" id="email" placeholder="Your Email" type="email" required="">
+                    <input class="form-control" name="mail" id="email" placeholder="Your Email" type="email" required="">
                 </div>
                 <!-- form group end-->
                 <div class="form-group">
-                    <input class="form-control" placeholder="Your Website" type="text" required="">
+                    {{-- <input class="form-control" name="cinsiyet" id="email" placeholder="Your Gender" type="email" required=""> --}}
+                    <select class="form-control" name="cinsiyet" id="" placeholder="Your Gender">
+                        <option value="erkek">Erkek</option>
+                        <option value="kadin">Kadın</option>
+                    </select>
                 </div>
+                <!-- form group end-->
+
                 <!-- form group end-->
             </div>
             <!-- Col end -->
             <div class="col-md-6">
                 <div class="form-group">
-                    <textarea class="form-control msg-box" id="message" placeholder="Your Comment" rows="10" required=""></textarea>
+                    <textarea class="form-control msg-box" name="comment" id="message" placeholder="Your Comment" cols="30" rows="30" required=""></textarea>
+
                 </div>
             </div>
             <!-- Col end -->
             <div class="col-md-12">
-                <p class="comment-form-cookies-consent">
-                    <input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes">
-                    <label for="wp-comment-cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label>
-                </p>
+
+
             </div>
         </div>
         <!-- Form row end -->
         <div class="clearfix">
             <button class="comments-btn btn btn-primary" type="submit">Post Comment</button>
         </div>
+
     </form>
+
+
     <!-- Form end -->
 </div>
+
+
+
