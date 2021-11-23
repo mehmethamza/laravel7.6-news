@@ -18,7 +18,7 @@
                         <!--nav right menu start-->
                         <ul class="right-menu align-to-right">
                             <li>
-                                <a href="">
+                                <a href="{{route("kullanici.login")}}">
                                     <i class="fa fa-user-circle-o"></i>
                                 </a>
                             </li>

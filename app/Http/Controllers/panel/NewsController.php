@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\panel;
 
+use App\Mail\Bilgilendir;
 use App\Models\Caco;
 use Illuminate\Http\Request;
 
 use App\Models\Category;
 use App\Models\Contents;
 use App\Models\panel\News;
+use App\Models\Subscribers;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 
@@ -61,6 +64,12 @@ class NewsController extends Controller
         $save = $item->save();
         $caco -> contents_id = $item -> id;
         $caco -> save();
+        $sub = Subscribers::where("durum","aktif")->get();
+        foreach ($sub as $su) {
+            # code...
+
+        Mail::to($su-> mail) ->send(new Bilgilendir($item));
+        }
         if( $save ){
             return redirect()->route('news.index')->with('success', 'Kayıt Eklendi');
         }

@@ -118,8 +118,8 @@
 
 
                 <li>
-                    <a href="#">{{$category -> name}}
-                        <span class="ts-green-bg">@php
+                    <a href="{{route("category",$category -> slug)}}">{{$category -> name}}
+                        <span class="ts-{{$color[array_rand($color)]}}-bg">@php
                             echo count($category -> contents) + count($category -> child);
                         @endphp</span>
                     </a>

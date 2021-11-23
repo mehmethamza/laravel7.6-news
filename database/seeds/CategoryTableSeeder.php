@@ -5,10 +5,13 @@ use Faker\Generator as Faker;
 use App\Models\Category;
 use App\Models\Contents;
 use App\Models\Setting;
+use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Hash;
+
 class CategoryTableSeeder extends Seeder
 {
     /**
@@ -18,6 +21,12 @@ class CategoryTableSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
+        User::insert([
+
+            "name" => "mehmet hamza ay",
+            "email" => "hamzaininal@gmail.com",
+            "password" => Hash::make("12345678"),
+        ]);
         Setting::insert([
             "logo" => "/images/logo/footer_logo.png",
             "braking" => "Parquet Courts on Resisting Nihilism & Why Tourism in Dubai is booming the world.",

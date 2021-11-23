@@ -10,6 +10,6 @@ class Comment extends Model
     protected $guarded = [];
 
     public function child(){
-        return $this -> hasMany("App\Models\Comment","pid");
+        return $this -> hasMany("App\Models\Comment","pid") -> where("durum","aktif");
     }
 }

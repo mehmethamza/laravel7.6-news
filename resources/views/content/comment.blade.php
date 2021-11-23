@@ -34,7 +34,7 @@
         }
     </style>
     <h3 class="comment-reply-title">Add Comment   </h3> <div style="display: none"  class="iptal" > <span class="iptalicerik"></span>  <span  class="kirmizi"  onclick=" kaldir( '{{encrypt(0)}}' ) "><i  class="fas fa-times"></i></span></div>
-    <form role="form" method="POST" action="{{route("comment.add")}}" class="ts-form">
+    <form role="form" method="POST" action="{{route("comment.store")}}" class="ts-form">
         @csrf
         <input type="hidden" name="content_id" value="{{encrypt($content -> id) }}">
         <input type="hidden" class="pid" name="pid" value="{{encrypt(0)}}">

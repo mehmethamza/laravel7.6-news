@@ -4,6 +4,7 @@ use App\Http\Controllers\AnasayfaController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\KullaniciController;
 use App\Http\Controllers\panel\CategoryController as PanelCategoryController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\panel\LoginController;
@@ -13,11 +14,18 @@ use App\Http\Controllers\panel\Auth;
 
 use App\Http\Controllers\panel\ImageController;
 use App\Http\Controllers\panel\SettingController;
+use App\Http\Controllers\SubscriberController;
+use App\Mail\AbonelikOnay;
+use App\Mail\Bilgilendir;
 use App\Models\Category;
+
 use App\Models\Contents;
+use App\Models\Setting;
+use App\Models\Subscribers;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +38,7 @@ use Illuminate\Support\Facades\Hash;
 |
 */
 
-Route::get('/', [AnasayfaController::class ,"anasayfa"]);
+Route::get('/', [AnasayfaController::class ,"anasayfa"]) -> name("anasayfa");
 
 Route::get('/deneme', function () {
    $categories =  Category::where("pid",0) ->with("child") ->get();
@@ -62,12 +70,45 @@ Route::get("/content/{slug}",[ContentController::class,"content"])->name("conten
 Route::get("/category/{slug}",[CategoryController::class,"category"]) -> name("category");
 Route::get("/search/",[SearchController::class,"search"]) -> name("search");
 
+Route::resource('comment', 'CommentController')->except(['show', 'destroy']);
 
-Route::name("comment.")-> group(function (){
 
-    Route::post("/comment/add",[CommentController::class,"add"]) -> name("add");
-});
+// Route::name("comment.")-> group(function (){
 
+//     Route::post("/comment/add",function(){
+//         return "hamza";
+//     }) -> name("add");
+//     Route::get("/comment/onayla/{onay_kodu}",[CommentController::class,"onayla"]) -> name("onayla");
+// });
+
+// Route::name("subscriber.")-> group(function (){
+
+//     Route::post("/comment/add",[SubscriberController::class,"add"]) -> name("add");
+//     Route::get("/comment/onayla/{onay_kodu}",[SubscriberController::class,"onayla"]) -> name("onayla");
+// });
+
+Route::resource("subscriber","SubscriberController");
+Route::post("/subscriber/bilgilendir",[SubscriberController::class,"bilgilendir"]);
+
+ Route::name("kullanici.")-> group(function (){
+
+     Route::get("/kullanici/login",[KullaniciController::class,"login"]) -> name("login");
+     Route::get("/kullanici/register",[KullaniciController::class,"register"]) -> name("register");
+     Route::post("/kullanici/add",[KullaniciController::class,"add"]) -> name("add");
+     Route::post("/kullanici/sign",[KullaniciController::class,"sign"]) -> name("sign");
+     Route::post("/kullanici/edit",[KullaniciController::class,"edit"]) -> name("edit");
+
+
+    Route::get('/kullanici/panel', [KullaniciController::class, 'index'])->name('index');
+    Route::get('/kullanici/favoriler', [KullaniciController::class, 'fav'])->name('fav');
+    Route::get('/kullanici/comment', [KullaniciController::class, 'comment'])->name('comment');
+    Route::get('/kullanici/logout', [KullaniciController::class, 'logout'])->name('logout');
+
+
+
+
+
+ });
 
 
 
@@ -96,9 +137,9 @@ Route::group(["prefix" => "yonetim", "namespace" => "panel"] ,function () {
         // Route::get('setting/create', [SettingController::class, 'create'])->name('create');
         // Route::post('setting/store', [SettingController::class, 'store'])->name('store');
         Route::get('setting/edit/{id}', [SettingController::class, 'edit'])->name('edit');
-        Route::post('setting/update/{id}', [SettingController::class, 'update'])->name('update');
+        Route::post('setting/update/', [SettingController::class, 'update'])->name('update');
         // Route::get('setting/destroy/{id}', [SettingController::class, 'destroy'])->name('destroy');
-        Route::post('setting/status/{id}', [SettingController::class, 'status'])->name('status');
+        // Route::post('setting/status/{id}', [SettingController::class, 'status'])->name('status');
     });
     Route::name('author.')->middleware('auth')->group(function () {
         Route::get('author', [AuthorController::class, 'index'])->name('index');
@@ -136,4 +177,25 @@ Route::group(["prefix" => "yonetim", "namespace" => "panel"] ,function () {
         Route::post('image/rank', [ImageController::class, 'rank'])->name('rank');
         Route::get('image/destroy/{id}/{name}', [ImageController::class, 'destroy'])->name('destroy');
     });
+});
+
+
+
+
+
+Route::get("/test",function(){
+
+
+
+        $search = "aasd";
+        $contents = FacadesAuth::guard("user") -> user() -> content;
+        $categories = Category::where("pid",0)->get();
+
+        $color = ["orange","pink","purple","green"];
+        $setting = Setting::first();
+        $block_wrapper_2_right = Contents::all() -> random(3);
+
+
+
+        return view("user.fav",compact("categories","contents","color","search","setting","block_wrapper_2_right"));
 });

@@ -17,6 +17,6 @@ class CategoryController extends Controller
         $setting = Setting::first();
         $block_wrapper_2_right = Contents::all() -> random(3);
 
-        return view("category",compact("categories","contents","color","setting","block_wrapper_2_right"));
+        return view("category",compact("categories","contents","color","setting","block_wrapper_2_right","color"));
     }
 }

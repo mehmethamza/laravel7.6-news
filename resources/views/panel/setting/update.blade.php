@@ -17,7 +17,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form class="form" action="{{ route('category.update', ['id' => $item->id]) }}" method="POST" enctype="multipart/form-data">
+                        <form class="form" action="{{ route('setting.update') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="card-body">
@@ -44,7 +44,7 @@
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label text-right"> Pinterest</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="pinteret" value="{{ $item -> pinterest}}" class="{{ old('name') }}" placeholder="" />
+                                            <input type="text" class="form-control" name="pinterest" value="{{ $item -> pinterest}}" class="{{ old('name') }}" placeholder="" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -68,7 +68,7 @@
                                                 <span class="sr-only">Loading...</span>
                                             </div>
                                         </button>
-                                        <a href="{{ route('category.index') }}" class="btn font-weight-bold btn-secondary">İPTAL</a>
+                                        <a href="{{ route('setting.index') }}" class="btn font-weight-bold btn-secondary">İPTAL</a>
                                     </div>
                                 </div>
                             </div>

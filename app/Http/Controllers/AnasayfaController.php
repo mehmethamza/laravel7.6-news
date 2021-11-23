@@ -31,7 +31,8 @@ class AnasayfaController extends Controller
 
         $setting = Setting::first();
         $block_wrapper_2_right = Contents::all() -> random(3);
+        $color = ["orange","pink","purple","green"];
 
-        return view("welcome",compact("categories","block_wrapper_1","block_wrapper_2_1","block_wrapper_2_2","block_wrapper_2_3","block_wrapper_3","setting","block_wrapper_2_right","block_wrapper_2_right"));
+        return view("welcome",compact("categories","block_wrapper_1","block_wrapper_2_1","block_wrapper_2_2","block_wrapper_2_3","block_wrapper_3","setting","block_wrapper_2_right","block_wrapper_2_right","color"));
     }
 }

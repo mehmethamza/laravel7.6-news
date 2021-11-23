@@ -23,6 +23,8 @@ class CreateCommentTable extends Migration
             $table -> string("web") -> nullable();
             $table -> text("comment") -> nullable();
             $table -> string("image") -> nullable();
+            $table -> string("durum") -> nullable();
+            $table -> text("onay_kodu") -> nullable();
             $table->timestamps();
         });
     }
