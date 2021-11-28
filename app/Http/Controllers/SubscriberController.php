@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
+new ViewBaseController();
+
 class SubscriberController extends Controller
 {
     public function store(Request $request){

@@ -32,7 +32,7 @@
           <div class="ts-grid-box entry-header">
 
             <div class="clearfix entry-cat-header">
-              <h2 class="ts-title float-left">Favorilerim </h2>
+              <h2 class="ts-title float-left">Yorum Yaptığım İçerikler </h2>
 
             </div>
           </div>
@@ -41,17 +41,18 @@
       <div class="row">
         <div class="col-lg-9">
           <div class="row">
-            @if ( count($contents) == 0)
-                Üzgünüz herhangi bir kayıt bulunamadı
-            @else
-            @foreach ($contents  as $content)
+
+            @foreach ($comments    as $comment )
+            @php
+                $content = $comment -> content;
+            @endphp
                 <div class="col-lg-6 mb-10">
                     <div class="ts-overlay-style">
                         <div class="item">
                         <div class="ts-post-thumb">
                             <a class="post-cat ts-{{$color[array_rand($color)]}}-bg" href="#">
                                 @foreach ($content -> category as $category)
-                                    {{$category -> name}}
+                                    {{$category ->  name}}
                                 @endforeach
                             </a>
                             <a href="#">
@@ -75,7 +76,7 @@
                     </div>
                     </div>
             @endforeach
-            @endif
+
 
 
           </div>

@@ -12,4 +12,8 @@ class Comment extends Model
     public function child(){
         return $this -> hasMany("App\Models\Comment","pid") -> where("durum","aktif");
     }
+
+    public function content(){
+        return $this -> belongsTo("App\Models\Contents","content_id");
+    }
 }

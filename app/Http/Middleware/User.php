@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
-
+use Illuminate\Support\Facades\Auth;
 use Closure;
 
 class User
@@ -15,6 +15,12 @@ class User
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if (Auth::guard("user") -> check()) {
+            return $next($request);
+        }else {
+
+            return redirect() -> route("kullanici.login");
+        }
+
     }
 }

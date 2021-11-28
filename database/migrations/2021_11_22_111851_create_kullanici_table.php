@@ -19,6 +19,7 @@ class CreateKullaniciTable extends Migration
             $table -> string("password")->nullable();
             $table -> string("name")->nullable();
             $table -> string("surname")->nullable();
+            $table -> string("gender") -> nullable();
             $table->rememberToken() -> nullable();
 
             $table->timestamps();

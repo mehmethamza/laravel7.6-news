@@ -39,33 +39,47 @@
         <input type="hidden" name="content_id" value="{{encrypt($content -> id) }}">
         <input type="hidden" class="pid" name="pid" value="{{encrypt(0)}}">
         <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <input class="form-control" name="name" id="name" placeholder="Your Name" type="text" required="">
-                </div>
-                <!-- form group end-->
-                <div class="form-group">
-                    <input class="form-control" name="mail" id="email" placeholder="Your Email" type="email" required="">
-                </div>
-                <!-- form group end-->
-                <div class="form-group">
-                    {{-- <input class="form-control" name="cinsiyet" id="email" placeholder="Your Gender" type="email" required=""> --}}
-                    <select class="form-control" name="cinsiyet" id="" placeholder="Your Gender">
-                        <option value="erkek">Erkek</option>
-                        <option value="kadin">Kadın</option>
-                    </select>
-                </div>
-                <!-- form group end-->
 
-                <!-- form group end-->
-            </div>
-            <!-- Col end -->
-            <div class="col-md-6">
-                <div class="form-group">
-                    <textarea class="form-control msg-box" name="comment" id="message" placeholder="Your Comment" cols="30" rows="30" required=""></textarea>
+            @if (Auth("user") -> check())
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <textarea class="form-control msg-box" name="comment" id="message" placeholder="Your Comment" cols="30" rows="30" required=""></textarea>
 
+                    </div>
                 </div>
-            </div>
+            @else
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input class="form-control" name="name" id="name" placeholder="Your Name" type="text" required="">
+                    </div>
+                    <!-- form group end-->
+
+                    <div class="form-group">
+                        <input class="form-control" name="mail" id="email" placeholder="Your Email" type="email" required="">
+                    </div>
+
+
+
+                    <!-- form group end-->
+                    <div class="form-group">
+                        {{-- <input class="form-control" name="cinsiyet" id="email" placeholder="Your Gender" type="email" required=""> --}}
+                        <select class="form-control" name="cinsiyet" id="" placeholder="Your Gender">
+                            <option value="erkek">Erkek</option>
+                            <option value="kadin">Kadın</option>
+                        </select>
+                    </div>
+                    <!-- form group end-->
+
+                    <!-- form group end-->
+                </div>
+                <!-- Col end -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <textarea class="form-control msg-box" name="comment" id="message" placeholder="Your Comment" cols="30" rows="30" required=""></textarea>
+
+                    </div>
+                </div>
+            @endif
             <!-- Col end -->
             <div class="col-md-12">
 

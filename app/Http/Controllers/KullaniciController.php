@@ -5,11 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Contents;
+use App\Models\Fav;
 use App\Models\Kullanici;
+use App\Models\panel\Author;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+
+new ViewBaseController();
+
+function getAuthUserComments(){
+    return  Auth::guard("user")->user()-> comments;
+
+}
 
 class KullaniciController extends Controller
 {
@@ -17,10 +26,8 @@ class KullaniciController extends Controller
         if (Auth::guard("user") -> check()) {
             return redirect()-> route("kullanici.index");
         }
-        $categories = Category::where("pid",0)->with("child") -> get();
-        $setting = Setting::first();
-        $color = ["orange","pink","purple","green"];
-        return view("user.user_login",compact("categories","setting","color"));
+
+        return view("user.user_login");
     }
 
     public function logout(){
@@ -31,10 +38,8 @@ class KullaniciController extends Controller
     }
 
     public function register(){
-        $categories = Category::where("pid",0)->with("child") -> get();
-        $setting = Setting::first();
-        $color = ["orange","pink","purple","green"];
-        return view("user.user_register",compact("categories","setting","color"));
+
+        return view("user.user_register");
     }
 
     public function add(Request $request){
@@ -42,6 +47,7 @@ class KullaniciController extends Controller
         $kullanici ->name = $request -> name;
         $kullanici ->surname = $request -> surname;
         $kullanici ->email = $request -> email;
+        $kullanici ->gender = $request -> gender;
         $kullanici ->password = Hash::make($request -> password) ;
         $kullanici -> save();
 
@@ -63,70 +69,81 @@ class KullaniciController extends Controller
     }
 
     public function index(){
-        if (Auth::guard("user") -> check()) {
-            $user = Auth::guard("user") -> user();
-            $categories = Category::where("pid",0)->with("child") -> get();
-            $setting = Setting::first();
-            $color = ["orange","pink","purple","green"];
-           return view("user.panel",compact("categories","setting","color","user"));
-        }
+
+        $user = Auth::guard("user") -> user();
+
+        return view("user.panel",compact("user"));
+
 
     }
 
     public function fav(){
-        if (Auth::guard("user") -> check()) {
-            $search = "aasd";
-            $contents = Auth::guard("user") -> user() -> content;
-            $categories = Category::where("pid",0)->get();
 
-            $color = ["orange","pink","purple","green"];
-            $setting = Setting::first();
-            $block_wrapper_2_right = Contents::all() -> random(3);
+
+        $contents = Auth::guard("user") -> user() -> favContents;
 
 
 
-            return view("user.fav",compact("categories","contents","color","search","setting","block_wrapper_2_right"));
-        }
+
+        return view("user.fav",compact("contents"));
+
     }
 
     public function comment(){
-        return Comment::where("mail",Auth::guard("user")->user()->email) -> get();
-        if (Auth::guard("user") -> check()) {
-
-            $search = "aasd";
-            $contents = Auth::guard("user") -> user() -> content;
-            $categories = Category::where("pid",0)->get();
-
-            $color = ["orange","pink","purple","green"];
-            $setting = Setting::first();
-            $block_wrapper_2_right = Contents::all() -> random(3);
 
 
 
-            return view("user.fav",compact("categories","contents","color","search","setting","block_wrapper_2_right"));
-        }
+        $comments = getAuthUserComments()->unique('content_id');
+        // $comments = $comments  ->unique('content_id');
+
+
+
+
+
+
+
+        return view("user.comment",compact("comments"));
+
     }
 
     public function edit(Request  $request){
-        if (Auth::guard("user") -> check()) {
 
-            $kullanici = Kullanici::find( Auth::guard("user")->user() -> id);
-            $kullanici ->name = $request -> name;
-            $kullanici ->surname = $request -> surname;
-            $kullanici ->email = $request -> email;
 
-            if (!empty($request->lastpassword)) {
-                if (Hash::check($request -> lastpassword, Auth::guard("user")-> user() ->password, [])) {
-                    if (!empty($request->password)) {
-                    $kullanici -> password = Hash::make($request -> password) ;
-                    }
+        $kullanici = Kullanici::find( Auth::guard("user")->user() -> id);
+        $kullanici ->name = $request -> name;
+        $kullanici ->surname = $request -> surname;
+        $kullanici ->email = $request -> email;
+
+        if (!empty($request->lastpassword)) {
+            if (Hash::check($request -> lastpassword, Auth::guard("user")-> user() ->password, [])) {
+                if (!empty($request->password)) {
+                $kullanici -> password = Hash::make($request -> password) ;
                 }
             }
-            $kullanici -> save();
-            return redirect() -> route("kullanici.panel");
+        }
+        $kullanici -> save();
+        return redirect() -> route("kullanici.index");
 
+
+
+    }
+
+    public function addfav(Request $request){
+
+        $fav = new Fav();
+        $fav -> kullanici_id = Auth::guard("user")->user()-> id;
+        $fav -> contents_id = decrypt($request -> content_id);
+        $save = $fav -> save();
+        if( $save ){
+            return back();
         }
 
+    }
+
+    public function subtractfav(Request $request){
+        $fav = Fav::where("contents_id",decrypt($request -> content_id))-> where("kullanici_id",Auth::guard("user") -> user() -> id) -> first();
+        $fav -> delete();
+        return back();
     }
 
 }

@@ -41,6 +41,13 @@
                                 </div> <!-- form-group end.// -->
                             </div> <!-- form-row end.// -->
                             <div class="form-group">
+                                <label>Your Gender</label>
+                               <select class="form-control" name="gender" id="">
+                                   <option value="erkek">Erkek</option>
+                                   <option value="kadin">Kadın</option>
+                               </select>
+                            </div> <!-- form-group end.// -->
+                            <div class="form-group">
                                 <label>Email address</label>
                                 <input type="email" class="form-control" name="email" placeholder="">
                                 <small class="form-text text-muted">We'll never share your email with anyone else.</small>

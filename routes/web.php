@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -92,17 +93,24 @@ Route::post("/subscriber/bilgilendir",[SubscriberController::class,"bilgilendir"
 
  Route::name("kullanici.")-> group(function (){
 
-     Route::get("/kullanici/login",[KullaniciController::class,"login"]) -> name("login");
-     Route::get("/kullanici/register",[KullaniciController::class,"register"]) -> name("register");
-     Route::post("/kullanici/add",[KullaniciController::class,"add"]) -> name("add");
-     Route::post("/kullanici/sign",[KullaniciController::class,"sign"]) -> name("sign");
-     Route::post("/kullanici/edit",[KullaniciController::class,"edit"]) -> name("edit");
+        Route::get("/kullanici/login",[KullaniciController::class,"login"]) -> name("login");
+        Route::get("/kullanici/register",[KullaniciController::class,"register"]) -> name("register");
+        Route::post("/kullanici/add",[KullaniciController::class,"add"]) -> name("add");
+        Route::post("/kullanici/sign",[KullaniciController::class,"sign"]) -> name("sign");
+
+        Route::group(["prefix" => "/kullanici" , "middleware" => "user"],function (){
+
+            Route::post("/edit",[KullaniciController::class,"edit"]) -> name("edit");
 
 
-    Route::get('/kullanici/panel', [KullaniciController::class, 'index'])->name('index');
-    Route::get('/kullanici/favoriler', [KullaniciController::class, 'fav'])->name('fav');
-    Route::get('/kullanici/comment', [KullaniciController::class, 'comment'])->name('comment');
-    Route::get('/kullanici/logout', [KullaniciController::class, 'logout'])->name('logout');
+            Route::get('/panel', [KullaniciController::class, 'index'])->name('index');
+            Route::get('/favoriler', [KullaniciController::class, 'fav'])->name('fav');
+            Route::get('/comment', [KullaniciController::class, 'comment'])->name('comment');
+            Route::get('/logout', [KullaniciController::class, 'logout'])->name('logout');
+
+            Route::post('/add/favori', [KullaniciController::class, 'addfav'])->name('addfav');
+            Route::post('/subtract/favori', [KullaniciController::class, 'subtractfav'])->name('subtractfav');
+    });
 
 
 

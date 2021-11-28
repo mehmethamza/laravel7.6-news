@@ -85,13 +85,15 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id){
+
         $item = Category::find($id);
         $item->name = $request->name;
         $item->slug =  Str::slug($request->name);
 
 
-        if ($item -> id == 0) {
+        if ($item -> pid == 0) {
             $item -> type = $request -> type;
+
         }
         else {
             $item -> pid = $request -> category_id;

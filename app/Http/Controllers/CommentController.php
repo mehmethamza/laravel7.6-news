@@ -7,6 +7,70 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\YorumOnay;
 use App\Models\Contents;
+use Illuminate\Support\Facades\Auth;
+
+new ViewBaseController();
+
+function setGenderImage($gender){
+
+    switch ($gender) {
+        case 'erkek':
+            return "/images/avater/author2.png";
+            break;
+
+        case 'kadin':
+            return "/images/avater/author.png";
+            break;
+
+        default:
+            # code...
+            break;
+    }
+
+}
+
+function createVerificationCode(){
+    return random_int(1,9999999999999999);
+}
+
+function sendCommentEmail($comment){
+    Mail::to("{{$comment -> mail}}") ->send(new YorumOnay($comment));
+}
+
+function storeLoggedInUserComment($request){
+
+    $comment = new Comment();
+    $comment -> content_id = decrypt($request -> content_id);
+    $user = Auth::guard("user") -> user();
+    $comment -> name = $user -> name;
+    $comment -> mail = $user -> email;
+    $comment -> comment = $request -> comment;
+    $comment -> pid = decrypt($request -> pid);
+    $comment -> image = setGenderImage($user->gender);
+    $comment -> durum = "aktif";
+    $comment -> save();
+
+
+}
+
+function storeUnLoggedInUserComment($request){
+
+    $comment = new Comment();
+    $comment -> content_id = decrypt($request -> content_id);
+    $comment -> name = $request -> name;
+    $comment -> mail = $request -> mail;
+    $comment -> web = $request -> web;
+    $comment -> comment = $request -> comment;
+    $comment -> pid = decrypt($request -> pid);
+    $comment -> image = setGenderImage($request->cinsiyet);
+    $comment -> onay_kodu = createVerificationCode();
+    $comment -> durum = "pasif";
+    $comment -> save();
+    sendCommentEmail($comment);
+
+}
+
+
 
 class CommentController extends Controller
 {
@@ -14,38 +78,20 @@ class CommentController extends Controller
     public function store(Request $request){
         //return decrypt($request -> pid);
 
-        $comment = new Comment();
-        $comment -> content_id = decrypt($request -> content_id);
-        $comment -> name = $request -> name;
-        $comment -> mail = $request -> mail;
-        $comment -> web = $request -> web;
-        $comment -> comment = $request -> comment;
-        $comment -> pid = decrypt($request -> pid);
 
-        switch ($request -> cinsiyet) {
-            case 'erkek':
-                $comment -> image = "/images/avater/author2.png";
-                break;
 
-            case 'kadin':
-                $comment -> image = "/images/avater/author.png";
-                break;
+        if (Auth::guard("user") -> check()) {
 
-            default:
-                # code...
-                break;
+            storeLoggedInUserComment($request);
         }
+        else {
 
-        $comment -> onay_kodu = mt_rand(1,9999999999999999);
-        $comment -> durum = "pasif";
-        $comment -> save();
-        Mail::to("{{$comment -> mail}}") ->send(new YorumOnay($comment));
+            storeUnLoggedInUserComment($request);
+        }
 
         return  back();
 
     }
-
-    public function index() {}
 
 
 

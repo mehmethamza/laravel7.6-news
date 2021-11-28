@@ -26,8 +26,10 @@
                             </li>
 
                             <li class="">
-                                <a href="/">Bilgilerim</a>
+                                <a href="{{route("kullanici.comment")}}">Yorum Yaptığım İçerikler</a>
                             </li>
+
+
 
                             <li class="">
                                 <a href="{{route("kullanici.logout")}}">Çıkış Yap</a>

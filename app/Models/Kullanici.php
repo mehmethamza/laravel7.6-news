@@ -13,14 +13,14 @@ class Kullanici extends Authenticatable
     protected $table = "kullanici";
     protected $guarded = [];
 
-    public function content(){
+    public function favContents(){
 
         return  $this -> belongsToMany("App\Models\Contents","fav");
     }
 
     public function comments()
     {
-     return  $this->belongsTo('App\Model\Comments', 'user_id');
+     return  $this->hasMany('App\Models\Comment', 'mail',"email") -> with("content") ;
     }
 
 

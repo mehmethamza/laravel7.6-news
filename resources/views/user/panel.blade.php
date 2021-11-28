@@ -60,11 +60,11 @@
                                 <input class="form-control" name="password"  type="password">
                             </div> <!-- form-group end.// -->
 
-                                <button type="submit" class="btn btn-primary btn-block"> Register  </button>
+                                <button type="submit" class="btn btn-primary btn-block"> Update  </button>
                             </div> <!-- form-group// -->
-                            <small class="text-muted">By clicking the 'Sign Up' button, you confirm that you accept our Terms of use and Privacy Policy.</small>
+
                         </form>
-                            <div class="border-top card-body text-center">Have an account? <a href="login.html">Log In</a></div>
+
                     </div> <!-- card.// -->
 
                 </div><!-- grid box end -->
