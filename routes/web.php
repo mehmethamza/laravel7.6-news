@@ -4,6 +4,7 @@ use App\Http\Controllers\AnasayfaController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\IyzicoController;
 use App\Http\Controllers\KullaniciController;
 use App\Http\Controllers\panel\CategoryController as PanelCategoryController;
 use App\Http\Controllers\SearchController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\panel\Auth;
 
 use App\Http\Controllers\panel\ImageController;
 use App\Http\Controllers\panel\SettingController;
+use App\Http\Controllers\panel\UserController;
 use App\Http\Controllers\SubscriberController;
 use App\Mail\AbonelikOnay;
 use App\Mail\Bilgilendir;
@@ -74,19 +76,6 @@ Route::get("/search/",[SearchController::class,"search"]) -> name("search");
 Route::resource('comment', 'CommentController')->except(['show', 'destroy']);
 
 
-// Route::name("comment.")-> group(function (){
-
-//     Route::post("/comment/add",function(){
-//         return "hamza";
-//     }) -> name("add");
-//     Route::get("/comment/onayla/{onay_kodu}",[CommentController::class,"onayla"]) -> name("onayla");
-// });
-
-// Route::name("subscriber.")-> group(function (){
-
-//     Route::post("/comment/add",[SubscriberController::class,"add"]) -> name("add");
-//     Route::get("/comment/onayla/{onay_kodu}",[SubscriberController::class,"onayla"]) -> name("onayla");
-// });
 
 Route::resource("subscriber","SubscriberController");
 Route::post("/subscriber/bilgilendir",[SubscriberController::class,"bilgilendir"]);
@@ -110,6 +99,7 @@ Route::post("/subscriber/bilgilendir",[SubscriberController::class,"bilgilendir"
 
             Route::post('/add/favori', [KullaniciController::class, 'addfav'])->name('addfav');
             Route::post('/subtract/favori', [KullaniciController::class, 'subtractfav'])->name('subtractfav');
+
     });
 
 
@@ -169,12 +159,12 @@ Route::group(["prefix" => "yonetim", "namespace" => "panel"] ,function () {
     });
     Route::name('user.')->middleware('auth')->group(function () {
         Route::get('user', [UserController::class, 'index'])->name('index');
-        Route::get('user/create', [UserController::class, 'create'])->name('create');
-        Route::post('user/store', [UserController::class, 'store'])->name('store');
-        Route::get('user/edit/{id}', [UserController::class, 'edit'])->name('edit');
-        Route::post('user/update/{id}', [UserController::class, 'update'])->name('update');
-        Route::get('user/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
-        Route::post('user/status/{id}', [UserController::class, 'status'])->name('status');
+        // Route::get('user/create', [UserController::class, 'create'])->name('create');
+        // Route::post('user/store', [UserController::class, 'store'])->name('store');
+        // Route::get('user/edit/{id}', [UserController::class, 'edit'])->name('edit');
+        // Route::post('user/update/{id}', [UserController::class, 'update'])->name('update');
+        // Route::get('user/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
+        // Route::post('user/status/{id}', [UserController::class, 'status'])->name('status');
     });
     Route::name('image.')->middleware('auth')->group(function () {
         Route::get('image', [ImageController::class, 'index'])->name('index');
@@ -207,3 +197,11 @@ Route::get("/test",function(){
 
         return view("user.fav",compact("categories","contents","color","search","setting","block_wrapper_2_right"));
 });
+
+Route::get("/check",[IyzicoController::class,"check"]) -> name("check");
+
+
+// // Route::post("/payment",[IyzicoController::class,"paymentSuccess"]) -> name("payment");
+// // Route::post("/payment",[IyzicoController::class,"paymentSuccess"]) ;
+Route::match(['get', 'post'] ,"/payment/{user_id}",[IyzicoController::class,"paymentSuccess"]) -> name("payment");
+

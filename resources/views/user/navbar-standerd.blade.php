@@ -35,6 +35,10 @@
                                 <a href="{{route("kullanici.logout")}}">Çıkış Yap</a>
                             </li>
 
+                            <li class="">
+                                <a href="">Ödeme İşlemi</a>
+                            </li>
+
 
 
 

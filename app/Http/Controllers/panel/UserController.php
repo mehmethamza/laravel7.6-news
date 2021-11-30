@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\panel;
 
+use App\Models\Kullanici;
 use App\Models\panel\User as User;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $items = User::all();
+        $items = Kullanici::all();
         return view('panel.user.list', compact('items'));
     }
 

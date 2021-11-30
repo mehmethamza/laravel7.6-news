@@ -20,12 +20,27 @@ function getAuthUserComments(){
 
 }
 
+function getIpAdressInformation($ip){
+    $ip = "95.70.214.215";
+    $access_key = "0b1cab6c57a6dd134dae856eb1ba784a";
+    $ch = curl_init('http://api.ipstack.com/'.$ip.'?access_key='.$access_key.'');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $json = curl_exec($ch);
+    curl_close($ch);
+    $api_result = json_decode($json,false);
+    return $api_result;
+
+}
+
 class KullaniciController extends Controller
 {
     public function login(){
+
+
         if (Auth::guard("user") -> check()) {
             return redirect()-> route("kullanici.index");
         }
+
 
         return view("user.user_login");
     }
@@ -43,12 +58,22 @@ class KullaniciController extends Controller
     }
 
     public function add(Request $request){
+
+
+        $ip_information = getIpAdressInformation("31.223.108.56");
+
         $kullanici = new Kullanici();
         $kullanici ->name = $request -> name;
         $kullanici ->surname = $request -> surname;
         $kullanici ->email = $request -> email;
         $kullanici ->gender = $request -> gender;
         $kullanici ->password = Hash::make($request -> password) ;
+        $kullanici -> ip = "31.223.108.56";
+        $kullanici -> country = $ip_information -> country_name;
+        $kullanici -> continent = $ip_information -> continent_name;
+        $kullanici -> region = $ip_information -> region_name;
+        $kullanici -> zip = $ip_information -> zip;
+        $kullanici -> payment = "passive";
         $kullanici -> save();
 
         return redirect() -> route("kullanici.login");
@@ -62,16 +87,19 @@ class KullaniciController extends Controller
         ];
 
         if (Auth::guard('user')->attempt($credentials)) {
+
             return redirect() -> route("kullanici.index");
+
         } else {
+
             return redirect() -> route("kullanici.login");
+
         }
     }
 
     public function index(){
 
         $user = Auth::guard("user") -> user();
-
         return view("user.panel",compact("user"));
 
 
@@ -84,7 +112,6 @@ class KullaniciController extends Controller
 
 
 
-
         return view("user.fav",compact("contents"));
 
     }
@@ -92,16 +119,8 @@ class KullaniciController extends Controller
     public function comment(){
 
 
-
-        $comments = getAuthUserComments()->unique('content_id');
+         $comments = getAuthUserComments()->unique('content_id');
         // $comments = $comments  ->unique('content_id');
-
-
-
-
-
-
-
         return view("user.comment",compact("comments"));
 
     }
@@ -128,12 +147,13 @@ class KullaniciController extends Controller
 
     }
 
-    public function addfav(Request $request){
-
+    public function addfav(Request $request)
+    {
         $fav = new Fav();
         $fav -> kullanici_id = Auth::guard("user")->user()-> id;
         $fav -> contents_id = decrypt($request -> content_id);
         $save = $fav -> save();
+
         if( $save ){
             return back();
         }

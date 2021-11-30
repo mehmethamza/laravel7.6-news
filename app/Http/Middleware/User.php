@@ -16,7 +16,14 @@ class User
     public function handle($request, Closure $next)
     {
         if (Auth::guard("user") -> check()) {
-            return $next($request);
+            if (Auth::guard("user") -> user() -> payment =="passive") {
+               return redirect()->route("check");
+            }
+            else {
+
+                return $next($request);
+            }
+
         }else {
 
             return redirect() -> route("kullanici.login");

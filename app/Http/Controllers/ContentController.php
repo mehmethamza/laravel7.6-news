@@ -18,7 +18,7 @@ function getContent($slug){
     return  Contents::where("slug",$slug) ->firstOrFail();
 }
 
-function getContentSliders(){
+function getContentSlider(){
     return Contents::all() -> random(7);
 }
 
@@ -27,7 +27,7 @@ function getComments($content){
 }
 
 function getFavItem($content){
-    Fav::where("kullanici_id",Auth::guard("user")->user()->id) -> where("contents_id",$content->id) -> first();
+   return Fav::where("kullanici_id",Auth::guard("user")->user()->id) -> where("contents_id",$content->id) -> first();
 }
 
 function getCheckedCompact(){
@@ -48,13 +48,15 @@ class ContentController extends Controller
 
 
         $content =getContent($slug);
-        $content_sliders =getContentSliders();
+        $content_sliders =getContentSlider();
         $comments = getComments($content);
 
 
 
         if (Auth::guard("user")->check()) {
+
             $fav = getFavItem($content);
+
 
 
             return view("content",compact(getCheckedCompact()));

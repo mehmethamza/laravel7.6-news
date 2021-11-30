@@ -20,6 +20,13 @@ class CreateKullaniciTable extends Migration
             $table -> string("name")->nullable();
             $table -> string("surname")->nullable();
             $table -> string("gender") -> nullable();
+            $table -> string("ip") -> nullable();
+            $table -> string("country") -> nullable();
+            $table -> string("continent") -> nullable();
+            $table -> string("region") -> nullable();
+            $table -> string("zip") -> nullable();
+            $table -> string("payment") -> nullable();
+            $table -> string("payment_code") -> nullable();
             $table->rememberToken() -> nullable();
 
             $table->timestamps();

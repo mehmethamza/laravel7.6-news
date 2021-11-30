@@ -1,4 +1,4 @@
-<ul>
+{{-- <ul>
     @foreach ($categories as $categori)
         <li>{{$categori -> name}}</li>
         <ul>
@@ -14,4 +14,10 @@
             @endforeach
         </ul>
     @endforeach
-</ul>
+</ul> --}}
+
+<pre>
+@php
+   print_r( $paymentinput);
+@endphp
+</pre>

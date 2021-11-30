@@ -100,7 +100,8 @@ class CategoryTableSeeder extends Seeder
                         "title" => $title,
                         "slug" => Str::slug($title),
                         "content" => $faker ->realText(1000),
-                        "image" => $faker -> imageUrl($width = 640, $height = 480),
+                        // "image" => $faker -> imageUrl($width = 640, $height = 480),
+                        "image" => "https://perezcarreno.com/wp-content/uploads/2013/01/lorempixel-image.jpeg",
                         "created_at" => $dt  ,
                         "author_id" => $authorId,
 

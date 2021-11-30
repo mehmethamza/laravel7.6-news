@@ -29,7 +29,7 @@
                     <div class="reg-page">
                         <h3 class="log-sign-title mb-25">Please Signup</h3>
                         <form action="{{route("kullanici.add")}}" method="POST" >
-                            @csrf
+                            {{ csrf_field() }}
                             <div class="form-row">
                                 <div class="col form-group">
                                     <label>First name </label>
