@@ -16,12 +16,32 @@
         @include('layouts.partials.navbar-standerd')
 
 		<!-- header nav end-->
+        @include('user.navbar-standerd')
+
 
 
   <!-- top bar start -->
   <!-- block post area start-->
 
   <!-- block area end-->
+
+       <div class="card">
+           <div class="card-header bg-white">
+               <style>
+                   .display-3{
+                       color: rgb(0, 0, 0);
+                   }
+               </style>
+                <center><h6 class="display-3">Üyelik İçin Ödeme İşlemi</h6></center>
+           </div>
+           <div class="card-body">
+                <div id="iyzipay-checkout-form" class="responsive">{!! $checkoutFormInitialize !!}</div>
+
+           </div>
+       </div>
+
+
+
 
 
 

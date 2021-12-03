@@ -18,6 +18,8 @@ use Iyzipay\Model\PaymentGroup;
 use Iyzipay\Options;
 use Iyzipay\Request\CreateCheckoutFormInitializeRequest;
 
+new ViewBaseController();
+
 function activeUserAccount($id,$payment_code)
     {
        $user = Kullanici::find($id);
@@ -25,6 +27,7 @@ function activeUserAccount($id,$payment_code)
        $user -> payment_code = $payment_code;
        $user -> save();
 
+    Auth::guard("user")-> login($user);
       return redirect() -> route("kullanici.index") ;
 
 
@@ -103,11 +106,10 @@ class IyzicoController extends Controller
 
         $request->setBasketItems($basketItems);
 
-        $checkoutFormInitialize = \Iyzipay\Model\CheckoutFormInitialize::create($request, $options);
+        $checkoutFormInitialize = \Iyzipay\Model\CheckoutFormInitialize::create($request, $options)->getCheckoutFormContent();
 
-        print_r($checkoutFormInitialize);
 
-        // return view('deneme',compact('paymentinput'));
+        return view('user.payment',compact('checkoutFormInitialize'));
     }
 
     public function paymentSuccess(Request $request,$user_id)
