@@ -60,7 +60,10 @@
                             </h3>
                             <ul class="post-meta-info">
                                 <li>
-                                <i class="fa fa-clock-o"></i> March 21, 2019
+                                <i class="fa fa-clock-o"></i>
+                                    @php
+                                      echo   Carbon\Carbon::parse($content-> created_at )->toDateString();
+                                    @endphp
                                 </li>
                             </ul>
                             </div>

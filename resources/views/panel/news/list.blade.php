@@ -49,6 +49,7 @@
                                     <th>Resim</th>
                                     <th>Kategori Adı</th>
                                     <th>Haber Adı</th>
+                                    <th>Görebilenler</th>
 
 
                                     <th>İşlemler</th>
@@ -61,10 +62,26 @@
                                     <td>{{ $item->id }}</td>
                                     <td> <a><img src="{{$item -> image}}" width="100" style="width: 800 px" style="height: 600 px" alt=""></a></td>
                                     <td>
-                                         @foreach ($item ->category as $category)
-                                        {{$category -> name}}
-                                    @endforeach </td>
+                                            @foreach ($item ->category as $category)
+                                                {{$category -> name}}
+                                            @endforeach
+                                    </td>
                                     <td>{{ $item->title }}</td>
+                                    <td>
+                                        @switch($item -> payment_type)
+                                            @case(0)
+                                                Herkes
+                                                @break
+                                            @case(1)
+                                                Silver
+                                                @break
+                                            @case(2)
+                                                Gold
+                                                @break
+                                            @default
+
+                                        @endswitch
+                                    </td>
 
 
                                     <td nowrap="nowrap">
@@ -91,6 +108,7 @@
 											</span>
                                         </a>
                                     </td>
+
                                 </tr>
                             @endforeach
 

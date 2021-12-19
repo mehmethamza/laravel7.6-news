@@ -20,15 +20,18 @@ use Iyzipay\Request\CreateCheckoutFormInitializeRequest;
 
 new ViewBaseController();
 
-function activeUserAccount($id,$payment_code)
+function activeUserAccount($id,$checkoutForm)
     {
+        // $checkoutForm->getPaymentItems()[0] -> getItemId()
        $user = Kullanici::find($id);
        $user -> payment = "active";
-       $user -> payment_code = $payment_code;
+       $user -> payment_code = $checkoutForm -> getPaymentId();
+       $user -> payment_type =  $checkoutForm->getPaymentItems()[0] -> getItemId();
        $user -> save();
 
-    Auth::guard("user")-> login($user);
-      return redirect() -> route("kullanici.index") ;
+
+        Auth::guard("user")-> login($user);
+      return view("user.payment_success") ;
 
 
     }
@@ -52,8 +55,15 @@ class IyzicoController extends Controller
         $request = new \Iyzipay\Request\CreateCheckoutFormInitializeRequest();
         $request->setLocale(\Iyzipay\Model\Locale::TR);
         $request->setConversationId("123456789");
-        $request->setPrice("50");
-        $request->setPaidPrice("50");
+        if (request()-> type == "silver") {
+            $request->setPrice("50");
+            $request->setPaidPrice("50");
+        }
+        elseif (request() -> type == "gold") {
+            $request->setPrice("100");
+            $request->setPaidPrice("100");
+        }
+
         $request->setCurrency(\Iyzipay\Model\Currency::TL);
         $request->setBasketId($user -> id);
         $request->setPaymentGroup(\Iyzipay\Model\PaymentGroup::PRODUCT);
@@ -94,22 +104,35 @@ class IyzicoController extends Controller
 
         $basketItems = array();
         $firstBasketItem = new \Iyzipay\Model\BasketItem();
-        $firstBasketItem->setId($user -> id);
-        $firstBasketItem->setName("MemberShip");
-        $firstBasketItem->setCategory1("Member");
-        // $firstBasketItem->setCategory2("Accessories");
-        $firstBasketItem->setItemType(\Iyzipay\Model\BasketItemType::PHYSICAL);
-        $firstBasketItem->setPrice("50");
+        if (request() -> type == "silver") {
+            $firstBasketItem->setId(1);
+            $firstBasketItem->setName("Silver");
+            $firstBasketItem->setCategory1("Member");
+            // $firstBasketItem->setCategory2("Accessories");
+            $firstBasketItem->setItemType(\Iyzipay\Model\BasketItemType::PHYSICAL);
+            $firstBasketItem->setPrice("50");
+        }
+        elseif (request() -> type == "gold") {
+            $firstBasketItem->setId(2);
+            $firstBasketItem->setName("Gold");
+            $firstBasketItem->setCategory1("Member");
+            // $firstBasketItem->setCategory2("Accessories");
+            $firstBasketItem->setItemType(\Iyzipay\Model\BasketItemType::PHYSICAL);
+            $firstBasketItem->setPrice("100");
+        }
+
         $basketItems[0] = $firstBasketItem;
 
 
 
         $request->setBasketItems($basketItems);
 
-        $checkoutFormInitialize = \Iyzipay\Model\CheckoutFormInitialize::create($request, $options)->getCheckoutFormContent();
+        $checkoutFormInitialize = \Iyzipay\Model\CheckoutFormInitialize::create($request, $options);
+        print_r($checkoutFormInitialize->getCheckoutFormContent());
+        // ->getCheckoutFormContent();
 
 
-        return view('user.payment',compact('checkoutFormInitialize'));
+        // return view('user.payment',compact('checkoutFormInitialize'));
     }
 
     public function paymentSuccess(Request $request,$user_id)
@@ -127,9 +150,10 @@ class IyzicoController extends Controller
         # make request
         $checkoutForm = \Iyzipay\Model\CheckoutForm::retrieve($request,$options);
 
+        // print_r($checkoutForm->getPaymentItems()[0] -> getItemId());
         # print result
         // return $checkoutForm -> getPaymentId(); buda iyziconun oluşturduğu ödeme id si
         // return $checkoutForm -> getBasketId();  B67832 şeklinde döndü dewfault templatede
-        return activeUserAccount(decrypt($user_id) ,$checkoutForm -> getPaymentId());
+        return activeUserAccount(decrypt($user_id) ,$checkoutForm );
     }
 }

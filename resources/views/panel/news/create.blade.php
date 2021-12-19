@@ -34,6 +34,19 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label text-right">Görme Yetkisi</label>
+                                        <div class="col-lg-6">
+                                            <select class="form-control select2 kt_select2" name="payment_type" required>
+                                                <option value=""></option>
+
+                                                <option value="0">Kayıtsız Kullanıcı + Ödeme Yapmamış Kullanıcı + Diğer Üyelikler</option>
+                                                <option value="1">Silver + Gold</option>
+                                                <option value="2">Gold</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
                                         <label class="col-lg-3 col-form-label text-right">Başlık</label>
                                         <div class="col-lg-6">
                                             <input type="text" class="form-control" name="title" value="{{ old('title') }}" placeholder="" />

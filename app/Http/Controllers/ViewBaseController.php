@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Contents;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 function select($categories , $sayi){
     foreach ($categories  as  $category) {
@@ -22,22 +23,44 @@ function getCategories(){
 }
 
 function getBlockWrapper1(){
-  return  Contents::all() -> random(4);
+    if (Auth::guard("user") -> check() ) {
+        $user = Auth::guard("user")-> user();
+        return  Contents::inRandomOrder()->where("payment_type","<=",$user -> payment_type)->  limit(4) -> get();
+
+    }
+  return  Contents::inRandomOrder()->where("payment_type",0)-> limit(4) -> get();
 }
 
 function getBlockWrapper21(){
-   return Contents::all() -> random(4) ;
+    if (Auth::guard("user") -> check() ) {
+        $user = Auth::guard("user")-> user();
+        return  Contents::inRandomOrder()->where("payment_type","<=",$user -> payment_type)->  limit(4) -> get();
+
+    }
+    return  Contents::inRandomOrder()->where("payment_type",0)-> limit(4) -> get();
+
 }
 function getBlockWrapper22(){
    return select(Category::inRandomOrder() ->get(),2);
 }
 
 function getBlockWrapper23(){
-   return Contents::all() -> random(4);
+    if (Auth::guard("user") -> check() ) {
+        $user = Auth::guard("user")-> user();
+        return  Contents::inRandomOrder()->where("payment_type","<=",$user -> payment_type)->  limit(4) -> get();
+
+    }
+     return  Contents::inRandomOrder()->where("payment_type",0)-> limit(4) -> get();
 }
 
 function getBlockWrapper3(){
-    return Contents::orderBy('created_at', 'DESC') -> take(4) -> get();
+    if (Auth::guard("user") -> check() ) {
+        $user = Auth::guard("user")-> user();
+        return  Contents::orderBy('created_at', 'DESC')->where("payment_type","<=",$user -> payment_type)->  limit(4) -> get();
+
+    }
+  return  Contents::orderBy('created_at', 'DESC')->where("payment_type",0)-> limit(4) -> get();
+
  }
 
 function getSetting(){
@@ -45,7 +68,12 @@ function getSetting(){
 }
 
 function getBlockWrapper2Right(){
-    return  Contents::all() -> random(3);
+    if (Auth::guard("user") -> check() ) {
+        $user = Auth::guard("user")-> user();
+        return  Contents::inRandomOrder()->where("payment_type","<=",$user -> payment_type)->  limit(3) -> get();
+
+    }
+  return  Contents::inRandomOrder()->where("payment_type",0)-> limit(3) -> get();
 }
 
 class ViewBaseController extends Controller

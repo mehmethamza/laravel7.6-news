@@ -58,6 +58,7 @@ class NewsController extends Controller
         $item->image =  $move_name ;
 
         $item->content = $request->content;
+        $item -> payment_type -> $request -> payment_type;
 
 
 
@@ -104,6 +105,7 @@ class NewsController extends Controller
         $item->slug =  Str::slug($request->title);
 
         $item->content = $request->content;
+        $item -> payment_type  = $request -> payment_type;
 
         if ( !empty(request() -> file("image"))) {
             try {

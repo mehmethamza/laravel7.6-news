@@ -26,6 +26,7 @@ class CreateKullaniciTable extends Migration
             $table -> string("region") -> nullable();
             $table -> string("zip") -> nullable();
             $table -> string("payment") -> nullable();
+            $table -> integer("payment_type") -> nullable();
             $table -> string("payment_code") -> nullable();
             $table->rememberToken() -> nullable();
 

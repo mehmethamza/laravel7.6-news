@@ -155,7 +155,13 @@ class KullaniciController extends Controller
         $save = $fav -> save();
 
         if( $save ){
-            return back();
+            new ContentController();
+            return  response()->json([
+                'success' => true,
+               ]) ;
+            //  ->with([
+            //     'status'=>200,
+                // "fav" => $content.getFavItem($content.getContent($request->slug)),]
         }
 
     }
@@ -163,7 +169,9 @@ class KullaniciController extends Controller
     public function subtractfav(Request $request){
         $fav = Fav::where("contents_id",decrypt($request -> content_id))-> where("kullanici_id",Auth::guard("user") -> user() -> id) -> first();
         $fav -> delete();
-        return back();
+        return  response()->json([
+            'success' => true,
+           ]) ;
     }
 
 }
