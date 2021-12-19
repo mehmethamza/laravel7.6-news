@@ -17,6 +17,7 @@ use App\Http\Controllers\panel\ImageController;
 use App\Http\Controllers\panel\SettingController;
 use App\Http\Controllers\panel\UserController;
 use App\Http\Controllers\SubscriberController;
+use App\Http\Controllers\ViewBaseController;
 use App\Mail\AbonelikOnay;
 use App\Mail\Bilgilendir;
 use App\Models\Category;
@@ -90,6 +91,10 @@ Route::post("/subscriber/bilgilendir",[SubscriberController::class,"bilgilendir"
         Route::group(["prefix" => "/kullanici" , "middleware" => "user"],function (){
 
             Route::post("/edit",[KullaniciController::class,"edit"]) -> name("edit");
+            Route::get("/payment/info",function(){
+                new ViewBaseController();
+                return view("user.payment_success");
+            }) -> name("info");
 
 
             Route::get('/panel', [KullaniciController::class, 'index'])->name('index');
@@ -198,9 +203,12 @@ Route::get("/test",function(){
         return view("user.fav",compact("categories","contents","color","search","setting","block_wrapper_2_right"));
 });
 
-Route::get("/check",[IyzicoController::class,"check"]) -> name("check");
+Route::get("/check",function(){
+    new ViewBaseController();
+    return view('user.payment');
+}) -> name("check");
 
-
+Route::match(["get","post"],"/pay/show",[IyzicoController::class,"check"]) -> name("payshow");
 // // Route::post("/payment",[IyzicoController::class,"paymentSuccess"]) -> name("payment");
 // // Route::post("/payment",[IyzicoController::class,"paymentSuccess"]) ;
 Route::match(['get', 'post'] ,"/payment/{user_id}",[IyzicoController::class,"paymentSuccess"]) -> name("payment");

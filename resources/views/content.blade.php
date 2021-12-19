@@ -58,35 +58,9 @@
                                         @if (Auth::guard("user") -> check())
 
 
-
-                                            @if (empty($fav))
-
-                                                <li>
-                                                    <a onclick="document.getElementById('form-add').submit();" href="javascript:;">
-                                                        Add Favori
-                                                        <i class="fas fa-plus"></i>
-                                                    </a>
-
-                                                    <form id="form-add" action="{{route("kullanici.addfav")}}" method="post">
-                                                        @csrf
-                                                        <input type="hidden" value="{{encrypt($content -> id )}}" name="content_id">
-                                                    </form>
-                                                </li>
-
-                                            @else
-                                                <li>
-                                                    <a onclick="document.getElementById('form-subtract').submit();" href="javascript:;">
-                                                        Subtract Favori
-                                                        <i class="fas fa-minus"></i>
-                                                    </a>
-
-                                                    <form id="form-subtract" action="{{route("kullanici.subtractfav")}}" method="post">
-                                                        @csrf
-                                                        <input type="hidden" value="{{encrypt($content -> id )}}" name="content_id">
-                                                    </form>
-                                                </li>
-
-                                            @endif
+                                            <span class="fav">
+                                            @include('content.render_fav')
+                                            </span>
 
                                         @endif
 

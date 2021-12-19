@@ -21,6 +21,7 @@ class CreateContentsTable extends Migration
             $table -> string("slug");
             $table -> text("content");
             $table -> string("image");
+            $table -> integer("payment_type")-> default(0);
             $table -> integer ("author_id") -> nullable() ;
 
 

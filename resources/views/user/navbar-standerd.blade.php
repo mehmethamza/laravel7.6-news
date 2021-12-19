@@ -36,7 +36,7 @@
                             </li>
 
                             <li class="">
-                                <a href="">Ödeme İşlemi</a>
+                                <a href="{{route("kullanici.info")}}">Ödeme Durumu</a>
                             </li>
 
 
